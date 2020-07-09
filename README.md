@@ -20,7 +20,7 @@ Renting
 - User opens the app to satisfy a specific need
     - "I need a powerwasher for the weekend"
 - User opens the app to browse (and subsequently rent items) around an experience
-    - Weekend outdoors: expands to show assorted camping equipment and a camera drone all available for rent
+    - Weekend outdoors: expands to show assorted camping equipment and a camera drone available for rent
 
 ### App Evaluation
 [Evaluation of your app across the following attributes]
