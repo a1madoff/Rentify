@@ -94,10 +94,7 @@ Settings -> Toggle settings
 
 ### Digital Wireframes & Mockups
 Figma link:
-
 https://www.figma.com/file/lRnlfLkRGGGeKzSYai7g3W/Rent-App-Wireframes?node-id=0%3A1
-
-
 
 
 <img src="PixelHomeScreen.png" width=400>
