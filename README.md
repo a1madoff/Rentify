@@ -89,7 +89,8 @@ Settings -> Toggle settings
 <!-- ## Wireframes
 <img src="wireframe.jpg" width=600> -->
 
-### [BONUS] Digital Wireframes & Mockups
+### Digital Wireframes & Mockups
+<img src="wireframe.jpg" width=600>
 
 ### [BONUS] Interactive Prototype
 
