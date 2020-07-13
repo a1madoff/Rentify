@@ -90,7 +90,7 @@ Settings -> Toggle settings
 <img src="wireframe.jpg" width=600> -->
 
 ### Digital Wireframes & Mockups
-<img src="wireframe.jpg" width=600>
+<img src="MapScreen.png" width=600>
 
 ### [BONUS] Interactive Prototype
 
