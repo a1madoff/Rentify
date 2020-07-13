@@ -90,10 +90,19 @@ Settings -> Toggle settings
 <img src="wireframe.jpg" width=600> -->
 
 ### Digital Wireframes & Mockups
-<img src="MapScreen.png" width=600>
+Figma link:
+https://www.figma.com/file/lRnlfLkRGGGeKzSYai7g3W/Rent-App-Wireframes?node-id=0%3A1
+
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FlRnlfLkRGGGeKzSYai7g3W%2FRent-App-Wireframes%3Fnode-id%3D8%253A10%26scaling%3Dscale-down&chrome=DOCUMENTATION" allowfullscreen></iframe>
+
+<img src="PixelHomeScreen.png" width=300>
+<img src="PixelMapScreen.png" width=300>
+<img src="PixelCalendarScreen.png" width=300>
+<img src="PixelProfileScreen.png" width=300>
 
 ### [BONUS] Interactive Prototype
 
+<!--
 ## Schema 
 [This section will be completed in Unit 9]
 ### Models
@@ -101,4 +110,4 @@ Settings -> Toggle settings
 ### Networking
 - [Add list of network requests by screen ]
 - [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+- [OPTIONAL: List endpoints if using existing API such as Yelp] -->
