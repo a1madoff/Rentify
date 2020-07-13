@@ -83,7 +83,7 @@ Renting
 
 Forced Log-in -> Account creation if no log in is available
 Item tile -> Item details screen
-Profile -> Text field to be modified.
+Profile -> Text field to be modified
 Settings -> Toggle settings
 
 <!-- ## Wireframes
