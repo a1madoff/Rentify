@@ -90,12 +90,13 @@ Settings -> Toggle settings
 <img src="wireframe.jpg" width=600> -->
 
 ### Digital Wireframes & Mockups
-Figma link: https://www.figma.com/file/lRnlfLkRGGGeKzSYai7g3W/Rent-App-Wireframes?node-id=0%3A1
+Figma link:
+https://www.figma.com/file/lRnlfLkRGGGeKzSYai7g3W/Rent-App-Wireframes?node-id=0%3A1
 
-<img src="HomeScreen.png" width=500>
-<img src="MapScreen.png" width=500>
-<img src="CalendarScreen.png" width=500>
-<img src="ProfileScreen.png" width=500>
+<img src="HomeScreen.png" width=300>
+<img src="MapScreen.png" width=300>
+<img src="CalendarScreen.png" width=300>
+<img src="ProfileScreen.png" width=300>
 
 ### [BONUS] Interactive Prototype
 
