@@ -93,8 +93,6 @@ Settings -> Toggle settings
 Figma link:
 https://www.figma.com/file/lRnlfLkRGGGeKzSYai7g3W/Rent-App-Wireframes?node-id=0%3A1
 
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FlRnlfLkRGGGeKzSYai7g3W%2FRent-App-Wireframes%3Fnode-id%3D8%253A10%26scaling%3Dscale-down&chrome=DOCUMENTATION" allowfullscreen></iframe>
-
 <img src="PixelHomeScreen.png" width=300>
 <img src="PixelMapScreen.png" width=300>
 <img src="PixelCalendarScreen.png" width=300>
