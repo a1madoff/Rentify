@@ -93,10 +93,10 @@ Settings -> Toggle settings
 Figma link:
 https://www.figma.com/file/lRnlfLkRGGGeKzSYai7g3W/Rent-App-Wireframes?node-id=0%3A1
 
-<img src="PixelHomeScreen.png" width=300>
-<img src="PixelMapScreen.png" width=300>
-<img src="PixelCalendarScreen.png" width=300>
-<img src="PixelProfileScreen.png" width=300>
+<img src="PixelHomeScreen.png" width=400>
+<img src="PixelMapScreen.png" width=400>
+<img src="PixelCalendarScreen.png" width=400>
+<img src="PixelProfileScreen.png" width=400>
 
 ### [BONUS] Interactive Prototype
 
