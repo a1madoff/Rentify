@@ -1,6 +1,7 @@
 package com.example.rentingapp;
 
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -8,6 +9,7 @@ import com.parse.ParseUser;
 public class Listing extends ParseObject {
     public static final String KEY_PRICE = "price";
     public static final String KEY_SELLER = "seller";
+    public static final String KEY_IMAGE = "image";
 
     public int getPriceCents() {
         return getInt(KEY_PRICE);
@@ -32,5 +34,13 @@ public class Listing extends ParseObject {
 
     public void setSeller(ParseUser seller) {
         put(KEY_SELLER, seller);
+    }
+
+    public ParseFile getImage() {
+        return getParseFile(KEY_IMAGE);
+    }
+
+    public void setImage(ParseFile parseFile) {
+        put(KEY_IMAGE, parseFile);
     }
 }

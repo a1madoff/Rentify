@@ -3,9 +3,8 @@ package com.example.rentingapp;
 import android.app.Application;
 
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseObject;
-
-import org.w3c.dom.Comment;
 
 public class ParseApplication extends Application {
 
