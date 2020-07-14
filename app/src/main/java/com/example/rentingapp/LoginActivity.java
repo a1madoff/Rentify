@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         if (ParseUser.getCurrentUser() != null) {
-            goHomeActivity();
+            goMainActivity();
         }
 
         etUsername = findViewById(R.id.etUsername);
@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.e(TAG, "Issue with login", e);
                     return;
                 }
-                goHomeActivity();
+                goMainActivity();
                 Toast.makeText(LoginActivity.this, "Successfully logged in!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -85,15 +85,15 @@ public class LoginActivity extends AppCompatActivity {
                     Log.e(TAG, "Issue with sign up", e);
                     return;
                 }
-                goHomeActivity();
+                goMainActivity();
                 Toast.makeText(LoginActivity.this, "Successfully signed up!", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
-    private void goHomeActivity() {
-        Intent i = new Intent(this, HomeActivity.class);
+    private void goMainActivity() {
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
         finish();
     }
