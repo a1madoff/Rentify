@@ -1,5 +1,6 @@
 package com.example.rentingapp.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 
 import com.example.rentingapp.Listing;
 import com.example.rentingapp.ListingsAdapter;
+import com.example.rentingapp.MainActivity;
+import com.example.rentingapp.MapsActivity;
 import com.example.rentingapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -76,7 +79,8 @@ public class ListingsFragment extends Fragment {
         floatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Hello", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getContext(), MapsActivity.class);
+                startActivity(i);
             }
         });
     }

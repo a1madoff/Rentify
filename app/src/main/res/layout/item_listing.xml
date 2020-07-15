@@ -24,6 +24,7 @@
         android:layout_alignEnd="@+id/ivListingImage"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        android:src="@drawable/heart_empty"
         app:srcCompat="@drawable/heart_empty" />
 
     <TextView
