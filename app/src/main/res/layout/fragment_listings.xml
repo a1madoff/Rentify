@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +12,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginTop="3dp"/>
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="4dp" />
 
-</RelativeLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingButton"
+        app:layout_behavior="com.example.rentingapp.ScrollAwareFABBehavior"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="16dp"
+        android:scaleType="center"
+        android:src="@drawable/map"
+        app:layout_anchor="@id/rvListings"
+        app:layout_anchorGravity="bottom|center"
+        app:maxImageSize="24dp"
+        android:visibility="visible" />
+<!--    android:backgroundTint="@color/white"-->
+<!--    app:backgroundTint="@color/white"-->
+
+
+<!--    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton-->
+<!--        android:id="@+id/extended_fab"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom|center"-->
+<!--        android:layout_margin="16dp"-->
+<!--        android:text="Map"-->
+<!--        app:icon="@drawable/map"-->
+<!--        app:iconGravity="textStart"-->
+<!--        app:iconPadding="10dp"-->
+<!--        app:iconSize="30dp" />-->
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

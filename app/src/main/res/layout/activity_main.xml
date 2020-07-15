@@ -8,7 +8,6 @@
     tools:context=".MainActivity">
 
     <FrameLayout
-
         android:id="@+id/flContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,6 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:elevation="10dp"
+        app:itemIconSize="20dp"
         app:menu="@menu/menu_bottom_navigation" />
+<!--        app:itemIconTint="@android:color/black"-->
+<!--        app:itemTextColor="@android:color/black"-->
 
 </RelativeLayout>

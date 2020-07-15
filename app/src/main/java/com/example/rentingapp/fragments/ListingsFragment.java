@@ -4,17 +4,21 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.rentingapp.Listing;
 import com.example.rentingapp.ListingsAdapter;
 import com.example.rentingapp.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +30,8 @@ public class ListingsFragment extends Fragment {
     public static final String TAG = "ListingsFragment";
 
     List<Listing> listings;
+
+    FloatingActionButton floatingButton;
 
     public ListingsFragment() {
         // Required empty public constructor
@@ -43,7 +49,15 @@ public class ListingsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         RecyclerView rvListings = view.findViewById(R.id.rvListings);
+        floatingButton = view.findViewById(R.id.floatingButton);
+
         listings = new ArrayList<>();
+        listings.add(new Listing());
+        listings.add(new Listing());
+        listings.add(new Listing());
+        listings.add(new Listing());
+        listings.add(new Listing());
+        listings.add(new Listing());
         listings.add(new Listing());
         listings.add(new Listing());
         listings.add(new Listing());
@@ -54,9 +68,16 @@ public class ListingsFragment extends Fragment {
         ListingsAdapter adapter = new ListingsAdapter(getContext(), listings);
         rvListings.setAdapter(adapter);
 
-//        rvListings.setLayoutManager(new LinearLayoutManager(this));
+//        rvListings.setLayoutManager(new LinearLayoutManager(getContext()));
         StaggeredGridLayoutManager layoutManager =
                 new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvListings.setLayoutManager(layoutManager);
+
+        floatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Hello", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
