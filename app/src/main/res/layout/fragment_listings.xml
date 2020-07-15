@@ -17,17 +17,17 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingButton"
-        app:layout_behavior="com.example.rentingapp.ScrollAwareFABBehavior"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_gravity="bottom|center"
         android:layout_margin="16dp"
         android:scaleType="center"
         android:src="@drawable/map"
+        android:visibility="visible"
         app:layout_anchor="@id/rvListings"
         app:layout_anchorGravity="bottom|center"
-        app:maxImageSize="24dp"
-        android:visibility="visible" />
+        app:layout_behavior="com.example.rentingapp.ScrollAwareFABBehavior"
+        app:maxImageSize="26dp" />
 <!--    android:backgroundTint="@color/white"-->
 <!--    app:backgroundTint="@color/white"-->
 

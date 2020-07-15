@@ -22,11 +22,11 @@ import java.util.List;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
-public class ListingsAdapter extends RecyclerView.Adapter<ListingsAdapter.ViewHolder> {
+public class MapsListingsAdapter extends RecyclerView.Adapter<MapsListingsAdapter.ViewHolder> {
     Context context;
     List<Listing> listings;
 
-    public ListingsAdapter(Context context, List<Listing> listings) {
+    public MapsListingsAdapter(Context context, List<Listing> listings) {
         this.context = context;
         this.listings = listings;
     }
@@ -34,7 +34,7 @@ public class ListingsAdapter extends RecyclerView.Adapter<ListingsAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_listing, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_maps_listing, parent, false);
         return new ViewHolder(view);
     }
 
@@ -91,7 +91,7 @@ public class ListingsAdapter extends RecyclerView.Adapter<ListingsAdapter.ViewHo
 
             Glide.with(context)
                     .load(R.drawable.stock_camera)
-                    .transform(new MultiTransformation(new CenterCrop(), new RoundedCornersTransformation(30, 10)))
+                    .transform(new MultiTransformation(new CenterCrop(), new RoundedCornersTransformation(50, 40)))
                     .into(ivListingImage);
         }
 

@@ -2,8 +2,8 @@ package com.example.rentingapp;
 
 import android.app.Application;
 
+import com.example.rentingapp.models.Listing;
 import com.parse.Parse;
-import com.parse.ParseException;
 import com.parse.ParseObject;
 
 public class ParseApplication extends Application {

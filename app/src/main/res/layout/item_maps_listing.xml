@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:layout_marginStart="2dp"
+    android:layout_marginEnd="2dp"
+    android:layout_marginTop="5dp">
+
+    <ImageView
+        android:id="@+id/ivListingImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/stock_camera" />
+
+    <ImageView
+        android:id="@+id/ivHeart"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/ivListingImage"
+        android:layout_alignEnd="@+id/ivListingImage"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:src="@drawable/heart_empty"
+        android:visibility="visible"
+        app:srcCompat="@drawable/heart_empty" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/ivListingImage"
+        android:layout_alignBottom="@+id/ivListingImage"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/text_box"
+        android:elevation="10dp"
+        android:padding="10dp"
+        android:text="$29/day"
+        android:textColor="@android:color/black"
+        android:backgroundTint="@android:color/white"
+        android:textSize="10sp" />
+    <!--    android:background="@android:drawable/toast_frame"-->
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivListingImage"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="5dp"
+        android:text="Olympus OM-D"
+        android:textColor="@android:color/black"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvDescription"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        android:numStars="5"
+        android:rating="4.3"
+        android:stepSize="0.1" />
+
+    <TextView
+        android:id="@+id/tvNumRentals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvDescription"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_toEndOf="@+id/ratingBar"
+        android:text="(59)" />
+
+    <TextView
+        android:id="@+id/tvLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ratingBar"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        android:text="Sunnyside"
+        android:textColor="@android:color/black" />
+
+
+</RelativeLayout>
