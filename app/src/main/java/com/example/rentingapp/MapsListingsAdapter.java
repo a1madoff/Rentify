@@ -2,12 +2,14 @@ package com.example.rentingapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -90,7 +92,7 @@ public class MapsListingsAdapter extends RecyclerView.Adapter<MapsListingsAdapte
             ratingBar.setRating((float) 4.2);
 
             Glide.with(context)
-                    .load(R.drawable.stock_camera)
+                    .load(listing.getImage().getUrl())
                     .transform(new MultiTransformation(new CenterCrop(), new RoundedCornersTransformation(50, 40)))
                     .into(ivListingImage);
         }

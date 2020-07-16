@@ -1,13 +1,17 @@
 package com.example.rentingapp;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.example.rentingapp.models.Listing;
 import com.google.android.gms.maps.CameraUpdate;
@@ -27,6 +31,7 @@ import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
@@ -37,6 +42,14 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
     List<Listing> listings;
     MapsListingsAdapter adapter;
 
+    RecyclerView rvMapListings;
+    SnapHelper snapHelper;
+    LinearLayoutManager layoutManager;
+    Marker prevHighlightedMarker;
+
+    private HashMap<String, Marker> listingMarkerHM = new HashMap<>();
+    private HashMap<Marker, Listing> MarkerListingHM = new HashMap<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,23 +58,15 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        RecyclerView rvMapListings = findViewById(R.id.rvMapListings);
+        rvMapListings = findViewById(R.id.rvMapListings);
+        snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(rvMapListings);
+
         listings = new ArrayList<>();
         adapter = new MapsListingsAdapter(this, listings);
         rvMapListings.setAdapter(adapter);
-        rvMapListings.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-//        listings.add(new Listing());
-//        listings.add(new Listing());
-//        listings.add(new Listing());
-//        listings.add(new Listing());
-//        listings.add(new Listing());
-//        listings.add(new Listing());
-//        listings.add(new Listing());
-//        listings.add(new Listing());
-//        listings.add(new Listing());
-//        listings.add(new Listing());
-//        listings.add(new Listing());
-//        listings.add(new Listing());
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        rvMapListings.setLayoutManager(layoutManager);
     }
 
     /**
@@ -81,19 +86,38 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(new LatLng(36.692733, -119.535017));
         map.moveCamera(cameraUpdate);
         getListings();
+
+        rvMapListings.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    // Reset icon for previously highlighted marker
+                    setMarkerIcon(prevHighlightedMarker, false);
+
+                    // Set marker icon for currently highlighted RecyclerView card
+                    View snapView = snapHelper.findSnapView(layoutManager);
+                    int position = rvMapListings.getChildAdapterPosition(snapView);
+                    Listing listing = listings.get(position);
+
+                    Marker marker = listingMarkerHM.get(listing.getObjectId());
+                    setMarkerIcon(marker, true);
+
+                    prevHighlightedMarker = marker;
+                }
+            }
+        });
     }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        IconGenerator iconGenerator = new IconGenerator(this);
-        iconGenerator.setStyle(3); // sets text to white
-        iconGenerator.setBackground(ContextCompat.getDrawable(this, R.drawable.text_box_color_accent));
-        Bitmap bitmap = iconGenerator.makeIcon(marker.getTitle());
-        // Uses BitmapDescriptorFactory to create the marker
-        BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(bitmap);
-        marker.setIcon(icon);
+        setMarkerIcon(prevHighlightedMarker, false);
+        setMarkerIcon(marker, true);
+        prevHighlightedMarker = marker;
 
-//        Toast.makeText(MapsActivity.this, "Marker clicked", Toast.LENGTH_SHORT).show();
+        Listing listing = MarkerListingHM.get(marker);
+        int position = listings.indexOf(listing);
+        rvMapListings.smoothScrollToPosition(position);
         return true;
     }
 
@@ -123,18 +147,45 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
 
                     ParseGeoPoint geoPoint = listing.getCoordinates();
                     LatLng latLng = new LatLng(geoPoint.getLatitude(), geoPoint.getLongitude());
-                    map.addMarker(new MarkerOptions()
+                    Marker marker = map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .title(price)
                             .icon(icon));
+
+                    listingMarkerHM.put(listing.getObjectId(), marker);
+                    MarkerListingHM.put(marker, listing);
                 }
                 adapter.addAll(listings);
 
-                ParseGeoPoint firstGeoPoint = listings.get(0).getCoordinates();
-                LatLng firstLatLng = new LatLng(firstGeoPoint.getLatitude(), firstGeoPoint.getLongitude());
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(firstLatLng, 13);
-                map.animateCamera(cameraUpdate);
+                // Listing 1
+                Listing listing1 = listings.get(0);
+                Marker marker1 = listingMarkerHM.get(listing1.getObjectId());
+                setMarkerIcon(marker1, true);
+                prevHighlightedMarker = marker1;
+
+                ParseGeoPoint GeoPoint1 = listing1.getCoordinates();
+                LatLng LatLng1 = new LatLng(GeoPoint1.getLatitude(), GeoPoint1.getLongitude());
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(LatLng1, 15);
+                map.moveCamera(cameraUpdate);
             }
         });
+    }
+
+    private void setMarkerIcon(Marker marker, boolean selected) {
+        IconGenerator iconGenerator = new IconGenerator(MapsActivity.this);
+        if (selected) {
+            iconGenerator.setStyle(3); // sets text to white
+            iconGenerator.setBackground(ContextCompat.getDrawable(this, R.drawable.text_box_color_accent));
+            Bitmap bitmap = iconGenerator.makeIcon(marker.getTitle());
+            // Uses BitmapDescriptorFactory to create the marker
+            BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(bitmap);
+            marker.setIcon(icon);
+        } else {
+            iconGenerator.setBackground(ContextCompat.getDrawable(this, R.drawable.text_box));
+            Bitmap bitmap = iconGenerator.makeIcon(marker.getTitle());
+            // Uses BitmapDescriptorFactory to create the marker
+            BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(bitmap);
+            marker.setIcon(icon);
+        }
     }
 }
