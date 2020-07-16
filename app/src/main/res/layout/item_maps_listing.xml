@@ -48,7 +48,7 @@
     <!--    android:background="@android:drawable/toast_frame"-->
 
     <TextView
-        android:id="@+id/tvDescription"
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivListingImage"
@@ -63,7 +63,7 @@
         style="@style/Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvDescription"
+        android:layout_below="@+id/tvTitle"
         android:layout_marginTop="5dp"
         android:layout_marginStart="5dp"
         android:numStars="5"
@@ -74,7 +74,7 @@
         android:id="@+id/tvNumRentals"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvDescription"
+        android:layout_below="@+id/tvTitle"
         android:layout_marginStart="5dp"
         android:layout_marginTop="3dp"
         android:layout_toEndOf="@+id/ratingBar"

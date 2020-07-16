@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,9 @@ import com.example.rentingapp.ListingsAdapter;
 import com.example.rentingapp.MapsActivity;
 import com.example.rentingapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +33,7 @@ public class ListingsFragment extends Fragment {
     public static final String TAG = "ListingsFragment";
 
     List<Listing> listings;
+    ListingsAdapter adapter;
 
     FloatingActionButton floatingButton;
 
@@ -51,20 +56,8 @@ public class ListingsFragment extends Fragment {
         floatingButton = view.findViewById(R.id.floatingButton);
 
         listings = new ArrayList<>();
-        listings.add(new Listing());
-        listings.add(new Listing());
-        listings.add(new Listing());
-        listings.add(new Listing());
-        listings.add(new Listing());
-        listings.add(new Listing());
-        listings.add(new Listing());
-        listings.add(new Listing());
-        listings.add(new Listing());
-        listings.add(new Listing());
-        listings.add(new Listing());
-        listings.add(new Listing());
 
-        ListingsAdapter adapter = new ListingsAdapter(getContext(), listings);
+        adapter = new ListingsAdapter(getContext(), listings);
         rvListings.setAdapter(adapter);
 
 //        rvListings.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -77,6 +70,24 @@ public class ListingsFragment extends Fragment {
             public void onClick(View view) {
                 Intent i = new Intent(getContext(), MapsActivity.class);
                 startActivity(i);
+            }
+        });
+
+        getListings();
+    }
+
+    private void getListings() {
+        // Specifies which class to query
+        ParseQuery<Listing> query = ParseQuery.getQuery(Listing.class);
+        query.include(Listing.KEY_SELLER); // TODO: need to include seller?
+        query.findInBackground(new FindCallback<Listing>() {
+            @Override
+            public void done(List<Listing> listings, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting listings", e);
+                    return;
+                }
+                adapter.addAll(listings);
             }
         });
     }

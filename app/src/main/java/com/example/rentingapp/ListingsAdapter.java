@@ -59,7 +59,7 @@ public class ListingsAdapter extends RecyclerView.Adapter<ListingsAdapter.ViewHo
         public ImageView ivListingImage;
         public ImageView ivHeart;
         public TextView tvPrice;
-        public TextView tvDescription;
+        public TextView tvTtitle;
         public RatingBar ratingBar;
         public TextView tvNumRentals;
         public TextView tvLocation;
@@ -70,7 +70,7 @@ public class ListingsAdapter extends RecyclerView.Adapter<ListingsAdapter.ViewHo
             ivListingImage = itemView.findViewById(R.id.ivListingImage);
             ivHeart = itemView.findViewById(R.id.ivHeart);
             tvPrice = itemView.findViewById(R.id.tvPrice);
-            tvDescription = itemView.findViewById(R.id.tvDescription);
+            tvTtitle = itemView.findViewById(R.id.tvTitle);
             ratingBar = itemView.findViewById(R.id.ratingBar);
             tvNumRentals = itemView.findViewById(R.id.tvNumRentals);
             tvLocation = itemView.findViewById(R.id.tvLocation);
@@ -87,12 +87,15 @@ public class ListingsAdapter extends RecyclerView.Adapter<ListingsAdapter.ViewHo
         }
 
         public void bind(Listing listing) {
-            ratingBar.setRating((float) 4.2);
-
             Glide.with(context)
-                    .load(R.drawable.stock_camera)
+                    .load(listing.getImage().getUrl())
                     .transform(new MultiTransformation(new CenterCrop(), new RoundedCornersTransformation(30, 10)))
                     .into(ivListingImage);
+
+            ratingBar.setRating((float) listing.getRating());
+            tvPrice.setText(String.format("$%s/day", listing.getPrice()));
+            tvTtitle.setText(listing.getTitle());
+
         }
 
         @Override

@@ -1,9 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ListingDetailsActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At varius vel pharetra vel turpis nunc eget. Et netus et malesuada fames ac turpis. Tempor nec feugiat nisl pretium fusce. Ac tortor dignissim convallis aenean et tortor. Turpis egestas maecenas pharetra convallis posuere morbi leo. Enim nec dui nunc mattis enim ut tellus elementum sagittis. Cum sociis natoque penatibus et magnis dis parturient montes nascetur. Et tortor at risus viverra adipiscing at. Velit egestas dui id ornare arcu odio. Nulla at volutpat diam ut venenatis. Velit sed ullamcorper morbi tincidunt ornare massa eget egestas purus. Magnis dis parturient montes nascetur ridiculus mus mauris. Lectus magna fringilla urna porttitor rhoncus dolor purus non. Feugiat sed lectus vestibulum mattis. Nec feugiat nisl pretium fusce. Est sit amet facilisis magna etiam tempor orci eu. Sodales ut etiam sit amet.
+
+Convallis posuere morbi leo urna molestie at elementum. Massa sapien faucibus et molestie ac feugiat sed lectus vestibulum. Sit amet nulla facilisi morbi tempus iaculis urna. Tempus iaculis urna id volutpat. Massa eget egestas purus viverra accumsan in nisl nisi. Amet purus gravida quis blandit turpis cursus in. Tincidunt tortor aliquam nulla facilisi cras fermentum. Eget velit aliquet sagittis id consectetur purus. In arcu cursus euismod quis viverra nibh cras pulvinar. Rhoncus urna neque viverra justo. Iaculis eu non diam phasellus vestibulum lorem. Nunc sed augue lacus viverra vitae congue eu. Risus nec feugiat in fermentum posuere urna nec tincidunt. Amet porttitor eget dolor morbi. Ultrices eros in cursus turpis massa tincidunt. Turpis nunc eget lorem dolor sed. Quis varius quam quisque id diam vel quam elementum. Ut tristique et egestas quis ipsum. At elementum eu facilisis sed odio morbi quis.
+
+Id donec ultrices tincidunt arcu non sodales neque sodales ut. Risus ultricies tristique nulla aliquet enim tortor. Egestas congue quisque egestas diam in arcu cursus euismod quis. Quis commodo odio aenean sed. Viverra adipiscing at in tellus integer feugiat. Ullamcorper sit amet risus nullam eget felis eget nunc lobortis. Sed elementum tempus egestas sed sed risus pretium quam. Gravida cum sociis natoque penatibus. Ultricies mi quis hendrerit dolor magna. Sit amet volutpat consequat mauris nunc congue nisi. Tellus orci ac auctor augue mauris augue neque gravida. Nunc vel risus commodo viverra maecenas accumsan lacus. Nisi quis eleifend quam adipiscing vitae proin sagittis nisl. Commodo elit at imperdiet dui accumsan. Neque sodales ut etiam sit amet nisl. Donec ac odio tempor orci dapibus ultrices in iaculis. At risus viverra adipiscing at in tellus integer feugiat scelerisque."></TextView>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:elevation="5dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:backgroundTint="@color/white">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/colorAccent"
+            android:text="Rent" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

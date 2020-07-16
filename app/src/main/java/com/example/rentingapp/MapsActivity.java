@@ -124,7 +124,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
     private void getListings() {
         // Specifies which class to query
         ParseQuery<Listing> query = ParseQuery.getQuery(Listing.class);
-        query.include(Listing.KEY_SELLER);
+        query.include(Listing.KEY_SELLER); // TODO: need to include seller?
 //        query.whereNear("location", userLocation); // OR whereWithinMiles
 //        query.whereWithinMiles()
 //        query.setLimit(10);

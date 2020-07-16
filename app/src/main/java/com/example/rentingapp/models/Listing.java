@@ -43,11 +43,11 @@ public class Listing extends ParseObject {
         put(KEY_IMAGE, parseFile);
     }
 
-    public int getRating() {
-        return getInt(KEY_RATING);
+    public double getRating() {
+        return getDouble(KEY_RATING);
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         put(KEY_RATING, rating);
     }
 
