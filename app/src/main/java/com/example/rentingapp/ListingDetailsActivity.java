@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,6 +44,7 @@ public class ListingDetailsActivity extends AppCompatActivity implements OnMapRe
 
     TextView tvPriceBottom;
     ImageView ivProfilePicture;
+    Button btnMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,7 @@ public class ListingDetailsActivity extends AppCompatActivity implements OnMapRe
 
         tvPriceBottom = findViewById(R.id.tvPriceBottom);
         ivProfilePicture = findViewById(R.id.ivProfilePicture);
+        btnMessage = findViewById(R.id.btnMessage);
 
 
         String boldText = "$29 ";
@@ -68,6 +73,15 @@ public class ListingDetailsActivity extends AppCompatActivity implements OnMapRe
                 .load(R.drawable.profile)
                 .transform(new CircleCrop())
                 .into(ivProfilePicture);
+
+        btnMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ChatActivity.class);
+                intent.putExtra("listing", Parcels.wrap(listing));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
