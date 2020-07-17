@@ -18,6 +18,8 @@ import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.example.rentingapp.models.Listing;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -104,7 +106,7 @@ public class ListingsAdapter extends RecyclerView.Adapter<ListingsAdapter.ViewHo
             if (position != RecyclerView.NO_POSITION) {
                 Listing currentListing = listings.get(position);
                 Intent intent = new Intent(context, ListingDetailsActivity.class);
-//                intent.putExtra(Listing.class.getSimpleName(), Parcels.wrap(currentListing));
+                intent.putExtra("listing", Parcels.wrap(currentListing));
                 context.startActivity(intent);
             }
         }

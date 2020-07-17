@@ -9,26 +9,262 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. At varius vel pharetra vel turpis nunc eget. Et netus et malesuada fames ac turpis. Tempor nec feugiat nisl pretium fusce. Ac tortor dignissim convallis aenean et tortor. Turpis egestas maecenas pharetra convallis posuere morbi leo. Enim nec dui nunc mattis enim ut tellus elementum sagittis. Cum sociis natoque penatibus et magnis dis parturient montes nascetur. Et tortor at risus viverra adipiscing at. Velit egestas dui id ornare arcu odio. Nulla at volutpat diam ut venenatis. Velit sed ullamcorper morbi tincidunt ornare massa eget egestas purus. Magnis dis parturient montes nascetur ridiculus mus mauris. Lectus magna fringilla urna porttitor rhoncus dolor purus non. Feugiat sed lectus vestibulum mattis. Nec feugiat nisl pretium fusce. Est sit amet facilisis magna etiam tempor orci eu. Sodales ut etiam sit amet.
+            android:layout_height="wrap_content">
 
-Convallis posuere morbi leo urna molestie at elementum. Massa sapien faucibus et molestie ac feugiat sed lectus vestibulum. Sit amet nulla facilisi morbi tempus iaculis urna. Tempus iaculis urna id volutpat. Massa eget egestas purus viverra accumsan in nisl nisi. Amet purus gravida quis blandit turpis cursus in. Tincidunt tortor aliquam nulla facilisi cras fermentum. Eget velit aliquet sagittis id consectetur purus. In arcu cursus euismod quis viverra nibh cras pulvinar. Rhoncus urna neque viverra justo. Iaculis eu non diam phasellus vestibulum lorem. Nunc sed augue lacus viverra vitae congue eu. Risus nec feugiat in fermentum posuere urna nec tincidunt. Amet porttitor eget dolor morbi. Ultrices eros in cursus turpis massa tincidunt. Turpis nunc eget lorem dolor sed. Quis varius quam quisque id diam vel quam elementum. Ut tristique et egestas quis ipsum. At elementum eu facilisis sed odio morbi quis.
+            <ImageView
+                android:id="@+id/ivListingImage"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/stock_camera">
+            </ImageView>
 
-Id donec ultrices tincidunt arcu non sodales neque sodales ut. Risus ultricies tristique nulla aliquet enim tortor. Egestas congue quisque egestas diam in arcu cursus euismod quis. Quis commodo odio aenean sed. Viverra adipiscing at in tellus integer feugiat. Ullamcorper sit amet risus nullam eget felis eget nunc lobortis. Sed elementum tempus egestas sed sed risus pretium quam. Gravida cum sociis natoque penatibus. Ultricies mi quis hendrerit dolor magna. Sit amet volutpat consequat mauris nunc congue nisi. Tellus orci ac auctor augue mauris augue neque gravida. Nunc vel risus commodo viverra maecenas accumsan lacus. Nisi quis eleifend quam adipiscing vitae proin sagittis nisl. Commodo elit at imperdiet dui accumsan. Neque sodales ut etiam sit amet nisl. Donec ac odio tempor orci dapibus ultrices in iaculis. At risus viverra adipiscing at in tellus integer feugiat scelerisque."></TextView>
+            <ImageView
+                android:id="@+id/ivHeart"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignTop="@+id/ivListingImage"
+                android:layout_alignEnd="@+id/ivListingImage"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/heart_empty"
+                app:srcCompat="@drawable/heart_empty" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ivListingImage"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:text="Olympus OM-D"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTitle"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="22dp"
+                android:numStars="5"
+                android:max="5"
+                android:rating="4.3"
+                android:stepSize="0.01" />
+
+            <TextView
+                android:id="@+id/tvNumRentals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTitle"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@+id/ratingBar"
+                android:text="(59)" />
+
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ratingBar"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="22dp"
+                android:text="Sunnyside" />
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tvLocation"
+                android:layout_marginStart="22dp"
+                android:layout_marginEnd="22dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/divider1"
+                android:layout_marginStart="42dp"
+                android:layout_marginEnd="52dp"
+                android:lineSpacingExtra="8sp"
+                android:text="A camera designed with speed, versatility, and portability in mind, the Olympus OM-D E-M1 Mark III is a well-rounded Micro Four Thirds mirrorless camera suitable for a variety of stills and video needs."
+                android:textColor="#B1000000"
+                android:textStyle="italic"
+                android:justificationMode="inter_word"/>
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tvDescription"
+                android:layout_marginStart="22dp"
+                android:layout_marginEnd="22dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/locationHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/divider2"
+                android:layout_marginStart="20dp"
+                android:text="Location"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvDetailsMap"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@+id/locationHeader"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp">
+
+                <fragment
+                    android:id="@+id/detailsMap"
+                    class="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/cvDetailsMap"
+                android:layout_marginStart="22dp"
+                android:layout_marginEnd="22dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="20dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/tvListedBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/divider3"
+                android:layout_marginStart="20dp"
+                android:text="Listed by"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/ivProfilePicture"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@id/tvListedBy"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/profile" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/ivProfilePicture"
+                android:layout_toEndOf="@id/ivProfilePicture"
+                android:text="Alex Madoff"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="15dp"/>
+
+            <TextView
+                android:id="@+id/tvTotalNumReviews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvName"
+                android:layout_toEndOf="@id/ivProfilePicture"
+                android:text="246 reviews"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="15dp"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivProfilePicture"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="-20dp">
+
+                <TextView
+                    android:id="@+id/tvTotalRating"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/text_box_heavy_shadow"
+                    android:gravity="center_vertical"
+                    android:paddingStart="15dp"
+                    android:text="4.8"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignEnd="@+id/tvTotalRating"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/star"
+                    android:backgroundTint="@color/colorAccent" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnMessage"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_alignTop="@id/ivProfilePicture"
+                android:layout_alignParentEnd="true"
+                android:backgroundTint="@android:color/white"
+                android:textColor="#91000000"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="30dp"
+                android:elevation="0dp"
+                android:text="Message" />
+
+            <Space
+                android:layout_below="@+id/tvTotalNumReviews"
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+        </RelativeLayout>
+
     </ScrollView>
 
     <RelativeLayout
         android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
+        android:layout_width="215dp"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="5dp"
         android:elevation="5dp"
         android:background="@android:drawable/dialog_holo_light_frame"
         android:backgroundTint="@color/white">
+
+        <TextView
+            android:id="@+id/tvPriceBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:text="$29 / day"
+            android:textSize="16sp">
+        </TextView>
 
         <Button
             android:layout_width="wrap_content"
@@ -36,8 +272,8 @@ Id donec ultrices tincidunt arcu non sodales neque sodales ut. Risus ultricies t
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/colorAccent"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="@color/white"
             android:text="Rent" />
 
     </RelativeLayout>
