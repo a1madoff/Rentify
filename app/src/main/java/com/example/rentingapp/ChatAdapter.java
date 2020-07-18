@@ -6,11 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.rentingapp.models.Message;
 
 import java.math.BigInteger;
@@ -46,15 +48,32 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         if (isMe) {
             holder.imageMe.setVisibility(View.VISIBLE);
             holder.imageOther.setVisibility(View.GONE);
-            holder.body.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+            holder.layoutMessage.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+
+//            holder.body.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+//            holder.tvName.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
         } else {
             holder.imageOther.setVisibility(View.VISIBLE);
             holder.imageMe.setVisibility(View.GONE);
-            holder.body.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+            holder.layoutMessage.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+
+//            holder.body.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+//            holder.tvName.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
         }
 
-        final ImageView profileView = isMe ? holder.imageMe : holder.imageOther;
-        Glide.with(mContext).load(getProfileUrl(message.getUserId())).into(profileView);
+        if (isMe) {
+            ImageView profileView = holder.imageMe;
+            Glide.with(mContext)
+                    .load(R.drawable.profile)
+                    .transform(new CircleCrop())
+                    .into(profileView);
+        } else {
+            ImageView profileView = holder.imageOther;
+            Glide.with(mContext)
+                    .load(R.drawable.random_prof)
+                    .transform(new CircleCrop())
+                    .into(profileView);
+        }
         holder.body.setText(message.getBody());
     }
 
@@ -81,12 +100,16 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         ImageView imageOther;
         ImageView imageMe;
         TextView body;
+        TextView tvName;
+        RelativeLayout layoutMessage;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imageOther = (ImageView)itemView.findViewById(R.id.ivProfileOther);
-            imageMe = (ImageView)itemView.findViewById(R.id.ivProfileMe);
-            body = (TextView)itemView.findViewById(R.id.tvBody);
+            imageOther = itemView.findViewById(R.id.ivProfileOther);
+            imageMe = itemView.findViewById(R.id.ivProfileMe);
+            body = itemView.findViewById(R.id.tvBody);
+            tvName = itemView.findViewById(R.id.tvName);
+            layoutMessage = itemView.findViewById(R.id.layoutMessage);
         }
     }
 }

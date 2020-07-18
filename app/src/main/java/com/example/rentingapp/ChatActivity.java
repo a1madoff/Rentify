@@ -1,10 +1,12 @@
 package com.example.rentingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -53,6 +55,7 @@ public class ChatActivity extends AppCompatActivity {
     Listing listing;
 
     ImageView ivListingImage;
+    CardView cvTopCard;
 
     // Create a handler which can run code periodically
     static final int POLL_INTERVAL = 1000; // milliseconds
@@ -79,6 +82,15 @@ public class ChatActivity extends AppCompatActivity {
                 .transform(new MultiTransformation(new CenterCrop(), new RoundedCornersTransformation(30, 10)))
                 .into(ivListingImage);
 
+        cvTopCard = findViewById(R.id.cvTopCard);
+        cvTopCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ListingDetailsActivity.class);
+                intent.putExtra("listing", Parcels.wrap(listing));
+                context.startActivity(intent);
+            }
+        });
 
         if (ParseUser.getCurrentUser() != null) {
             startWithCurrentUser();
@@ -96,9 +108,9 @@ public class ChatActivity extends AppCompatActivity {
     // Setup message field and posting
     void setupMessagePosting() {
         // Find the text field and button
-        etMessage = (EditText) findViewById(R.id.etMessage);
-        btSend = (Button) findViewById(R.id.btSend);
-        rvChat = (RecyclerView) findViewById(R.id.rvChat);
+        etMessage = findViewById(R.id.etMessage);
+        btSend = findViewById(R.id.btSend);
+        rvChat = findViewById(R.id.rvChat);
         mMessages = new ArrayList<>();
         mFirstLoad = true;
         final String userId = ParseUser.getCurrentUser().getObjectId();
@@ -108,6 +120,7 @@ public class ChatActivity extends AppCompatActivity {
         // associate the LayoutManager with the RecylcerView
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatActivity.this);
         linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
         rvChat.setLayoutManager(linearLayoutManager);
 
         // When send button is clicked, create message object on Parse

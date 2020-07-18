@@ -8,20 +8,19 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/topCard"
+        android:id="@+id/cvTopCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="5dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/ivListingImage"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
@@ -32,20 +31,21 @@
                 android:id="@+id/tvListingTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="22dp"
                 android:layout_toEndOf="@+id/ivListingImage"
                 android:text="Olympus OM-D"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvListingTitle"
-                android:layout_marginStart="6dp"
-                android:layout_toEndOf="@+id/ivListingImage"
-                android:text="Inquiry" />
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:text="Inquiry"
+                android:textStyle="italic" />
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
@@ -53,42 +53,55 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChat"
         android:transcriptMode="alwaysScroll"
-        android:layout_below="@id/topCard"
-        android:layout_above="@+id/rlSend"
+        android:layout_below="@id/cvTopCard"
+        android:layout_above="@+id/cvSend"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <RelativeLayout
-        android:id="@+id/rlSend"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:paddingTop="5dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="0dp"
-        android:paddingRight="0dp"
-        android:layout_height="wrap_content" >
+        />
 
-        <EditText
-            android:id="@+id/etMessage"
-            android:layout_toLeftOf="@+id/btSend"
-            android:layout_alignBottom="@+id/btSend"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:cardElevation="5dp"
+        >
+
+        <RelativeLayout
+            android:id="@+id/rlSend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="top"
-            android:hint="@string/message_hint"
-            android:inputType="textShortMessage"
-            android:imeOptions="actionSend" />
+            android:paddingVertical="10dp">
 
-        <Button
-            android:id="@+id/btSend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingRight="10dp"
-            android:layout_alignParentRight="true"
-            android:text="@string/send"
-            android:textSize="18sp" >
-        </Button>
+            <EditText
+                android:id="@+id/etMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_toLeftOf="@+id/btSend"
+                android:background="@drawable/text_box_no_shadow"
+                android:hint="Message"
+                android:imeOptions="actionSend"
+                android:inputType="textShortMessage"
+                android:paddingStart="15dp"
+                android:paddingVertical="5dp"
+                android:backgroundTint="#09000000"
+                />
 
-    </RelativeLayout>
+            <Button
+                android:id="@+id/btSend"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="7dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/send"
+                android:backgroundTint="@color/colorAccent"
+                />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>
