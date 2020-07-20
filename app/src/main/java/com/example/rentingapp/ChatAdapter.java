@@ -43,38 +43,31 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Message message = mMessages.get(position);
-        final boolean isMe = message.getUserId() != null && message.getUserId().equals(mUserId);
+        final boolean isRenter = message.getUserId() != null && message.getUserId().equals(mUserId);
 
-        if (isMe) {
-            holder.imageMe.setVisibility(View.VISIBLE);
-            holder.imageOther.setVisibility(View.GONE);
-            holder.layoutMessage.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
-
-//            holder.body.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
-//            holder.tvName.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
-        } else {
-            holder.imageOther.setVisibility(View.VISIBLE);
-            holder.imageMe.setVisibility(View.GONE);
-            holder.layoutMessage.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-
-//            holder.body.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-//            holder.tvName.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-        }
-
-        if (isMe) {
-            ImageView profileView = holder.imageMe;
-            Glide.with(mContext)
-                    .load(R.drawable.profile)
-                    .transform(new CircleCrop())
-                    .into(profileView);
-        } else {
-            ImageView profileView = holder.imageOther;
+        if (isRenter) {
+            // Renter
+            holder.layoutRenter.setVisibility(View.VISIBLE);
+            holder.layoutSeller.setVisibility(View.GONE);
+            ImageView profileView = holder.ivProfileRenter;
             Glide.with(mContext)
                     .load(R.drawable.random_prof)
                     .transform(new CircleCrop())
                     .into(profileView);
+
+            holder.tvBodyRenter.setText(message.getBody());
+        } else {
+            // Seller
+            holder.layoutSeller.setVisibility(View.VISIBLE);
+            holder.layoutRenter.setVisibility(View.GONE);
+            ImageView profileView = holder.ivProfileSeller;
+            Glide.with(mContext)
+                    .load(R.drawable.profile)
+                    .transform(new CircleCrop())
+                    .into(profileView);
+
+            holder.tvBodySeller.setText(message.getBody());
         }
-        holder.body.setText(message.getBody());
     }
 
     // Create a gravatar image based on the hash value obtained from userId
@@ -97,19 +90,28 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageOther;
-        ImageView imageMe;
-        TextView body;
-        TextView tvName;
-        RelativeLayout layoutMessage;
+        RelativeLayout layoutRenter;
+        ImageView ivProfileRenter;
+        TextView tvNameRenter;
+        TextView tvBodyRenter;
+
+        RelativeLayout layoutSeller;
+        ImageView ivProfileSeller;
+        TextView tvNameSeller;
+        TextView tvBodySeller;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imageOther = itemView.findViewById(R.id.ivProfileOther);
-            imageMe = itemView.findViewById(R.id.ivProfileMe);
-            body = itemView.findViewById(R.id.tvBody);
-            tvName = itemView.findViewById(R.id.tvName);
-            layoutMessage = itemView.findViewById(R.id.layoutMessage);
+            layoutRenter = itemView.findViewById(R.id.layoutRenter);
+            ivProfileRenter = itemView.findViewById(R.id.ivProfileRenter);
+            tvNameRenter = itemView.findViewById(R.id.tvNameRenter);
+            tvBodyRenter = itemView.findViewById(R.id.tvBodyRenter);
+
+            layoutSeller = itemView.findViewById(R.id.layoutSeller);
+            ivProfileSeller = itemView.findViewById(R.id.ivProfileSeller);
+            tvNameSeller = itemView.findViewById(R.id.tvNameSeller);
+            tvBodySeller = itemView.findViewById(R.id.tvBodySeller);
         }
     }
 }

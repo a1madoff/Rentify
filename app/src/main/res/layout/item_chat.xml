@@ -1,65 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingHorizontal="5dp"
-    android:paddingTop="10dp"
-    >
-
-    <ImageView
-        android:id="@+id/ivProfileOther"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:contentDescription="@string/profile_other"
-        app:srcCompat="@drawable/random_prof" />
+    android:orientation="vertical" >
 
     <RelativeLayout
-        android:id="@+id/layoutMessage"
-        android:layout_width="0dp"
+        android:id="@+id/layoutRenter"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="1" >
+        android:layout_marginTop="5dp"
+        >
+
+        <ImageView
+            android:id="@+id/ivProfileRenter"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/profile_me"
+            app:srcCompat="@drawable/random_prof"
+            android:layout_marginEnd="5dp"
+            />
 
         <TextView
-            android:id="@+id/tvName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:ellipsize="end"
-            android:lines="1"
-            android:paddingHorizontal="10dp"
-            android:text="Alex M."
-            android:textSize="14sp" />
-
-<!--        <TextView-->
-<!--            android:id="@+id/tvDate"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="5dp"-->
-<!--            android:layout_marginTop="5dp"-->
-<!--            android:layout_toEndOf="@+id/tvName"-->
-<!--            android:text="5 min"-->
-<!--            android:textColor="#31000000" />-->
-
-        <TextView
-            android:id="@+id/tvBody"
+            android:id="@+id/tvNameRenter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvName"
+            android:layout_toStartOf="@+id/ivProfileRenter"
             android:ellipsize="end"
             android:lines="1"
-            android:paddingHorizontal="11dp"
+            android:text="John S."
+            android:textSize="14sp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            />
+
+        <TextView
+            android:id="@+id/tvBodyRenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvNameRenter"
+            android:layout_toStartOf="@+id/ivProfileRenter"
+            android:ellipsize="end"
+            android:lines="1"
             android:text="Hello!"
             android:textColor="@android:color/black"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="2dp"
+            />
 
+        <!--        <TextView-->
+        <!--            android:id="@+id/tvDate"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="5dp"-->
+        <!--            android:layout_marginTop="5dp"-->
+        <!--            android:layout_toEndOf="@+id/tvName"-->
+        <!--            android:text="5 min"-->
+        <!--            android:textColor="#31000000" />-->
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/ivProfileMe"
-        android:layout_width="50dp"
+
+    <RelativeLayout
+        android:id="@+id/layoutSeller"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:contentDescription="@string/profile_me"
-        app:srcCompat="@drawable/profile" />
+        android:layout_marginTop="5dp"
+        >
+
+        <ImageView
+            android:id="@+id/ivProfileSeller"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/profile_me"
+            app:srcCompat="@drawable/profile"
+            android:layout_marginStart="5dp"
+            />
+
+        <TextView
+            android:id="@+id/tvNameSeller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/ivProfileSeller"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="Alex M."
+            android:textSize="14sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            />
+
+        <TextView
+            android:id="@+id/tvBodySeller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/ivProfileSeller"
+            android:layout_below="@id/tvNameSeller"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="Hello!"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            />
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/tvDate"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="5dp"-->
+        <!--            android:layout_marginTop="5dp"-->
+        <!--            android:layout_toEndOf="@+id/tvName"-->
+        <!--            android:text="5 min"-->
+        <!--            android:textColor="#31000000" />-->
+    </RelativeLayout>
 </LinearLayout>
