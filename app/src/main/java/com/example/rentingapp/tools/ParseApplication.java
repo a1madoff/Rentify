@@ -1,4 +1,4 @@
-package com.example.rentingapp;
+package com.example.rentingapp.tools;
 
 import android.app.Application;
 

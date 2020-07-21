@@ -26,7 +26,7 @@
         android:visibility="visible"
         app:layout_anchor="@id/rvListings"
         app:layout_anchorGravity="bottom|center"
-        app:layout_behavior="com.example.rentingapp.ScrollAwareFABBehavior"
+        app:layout_behavior="com.example.rentingapp.tools.ScrollAwareFABBehavior"
         app:maxImageSize="26dp" />
 <!--    android:backgroundTint="@color/white"-->
 <!--    app:backgroundTint="@color/white"-->

@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.rentingapp.models.Listing;
-import com.example.rentingapp.ListingsAdapter;
+import com.example.rentingapp.adapters.ListingsAdapter;
 import com.example.rentingapp.MapsActivity;
 import com.example.rentingapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
