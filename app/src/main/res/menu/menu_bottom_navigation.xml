@@ -13,6 +13,11 @@
         android:title="Messages"
         app:showAsAction="always" />
     <item
+        android:id="@+id/action_listings"
+        android:icon="@drawable/money"
+        android:title="Listings"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/action_profile"
         android:icon="@drawable/profile_empty"
         android:title="Profile"

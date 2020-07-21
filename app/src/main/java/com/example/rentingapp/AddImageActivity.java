@@ -22,17 +22,14 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
-public class CreateListingActivity extends AppCompatActivity {
-    public static final String TAG = "CreateListingActivity";
+public class AddImageActivity extends AppCompatActivity {
+    public static final String TAG = "AddImageActivity";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
     public final static int PICK_PHOTO_CODE = 1046;
 
@@ -52,7 +49,7 @@ public class CreateListingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_listing);
+        setContentView(R.layout.activity_add_image);
 
         context = this;
 
@@ -105,7 +102,7 @@ public class CreateListingActivity extends AppCompatActivity {
         photoFile = getPhotoFileUri(photoFileName);
 
         // Wraps File object into a content provider
-        Uri fileProvider = FileProvider.getUriForFile(context, "com.codepath.fileprovider", photoFile);
+        Uri fileProvider = FileProvider.getUriForFile(context, "com.codepath.fileprovider.rentingapp", photoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
         if (intent.resolveActivity(context.getPackageManager()) != null) {
@@ -187,27 +184,27 @@ public class CreateListingActivity extends AppCompatActivity {
     }
 
     private void savePost(String description, ParseUser currentUser, File photoFile) {
-        Post post = new Post();
-        post.setDescription(description);
-        if (bitmapdata == null) {
-            post.setImage(new ParseFile(photoFile));
-        } else {
-            post.setImage(new ParseFile(bitmapdata));
-        }
-        post.setUser(currentUser);
-        post.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Error while saving", e);
-                    Toast.makeText(context, "Error while saving!", Toast.LENGTH_SHORT).show();
-                }
-
-                Log.i(TAG, "Post save was successful!");
-                etDescription.setText("");
-                ivPostImage.setImageResource(0);
-                pbLoading.setVisibility(ProgressBar.INVISIBLE);
-            }
-        });
+//        Post post = new Post();
+//        post.setDescription(description);
+//        if (bitmapdata == null) {
+//            post.setImage(new ParseFile(photoFile));
+//        } else {
+//            post.setImage(new ParseFile(bitmapdata));
+//        }
+//        post.setUser(currentUser);
+//        post.saveInBackground(new SaveCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                if (e != null) {
+//                    Log.e(TAG, "Error while saving", e);
+//                    Toast.makeText(context, "Error while saving!", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                Log.i(TAG, "Post save was successful!");
+//                etDescription.setText("");
+//                ivPostImage.setImageResource(0);
+//                pbLoading.setVisibility(ProgressBar.INVISIBLE);
+//            }
+//        });
     }
 }

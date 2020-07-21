@@ -7,9 +7,9 @@ import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.example.rentingapp.fragments.ListingsFragment;
+import com.example.rentingapp.fragments.CreateListingFragment;
+import com.example.rentingapp.fragments.ExploreFeedFragment;
 import com.example.rentingapp.fragments.MessagesFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -30,15 +30,18 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment;
                 switch (menuItem.getItemId()) {
                     case R.id.action_home:
-                        fragment = new ListingsFragment();
+                        fragment = new ExploreFeedFragment();
                         break;
                     case R.id.action_messages:
                         fragment = new MessagesFragment();
                         break;
+                    case R.id.action_listings:
+                        fragment = new CreateListingFragment();
+                        break;
                     case R.id.action_profile:
                     default:
                         // TODO: update fragment
-                        fragment = new ListingsFragment();
+                        fragment = new ExploreFeedFragment();
                         break;
                 }
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();

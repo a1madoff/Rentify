@@ -7,4 +7,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="counterText">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="counterOverride">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+    </style>
+
 </resources>

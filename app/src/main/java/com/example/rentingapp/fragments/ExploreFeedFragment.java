@@ -29,23 +29,23 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListingsFragment extends Fragment {
-    public static final String TAG = "ListingsFragment";
+public class ExploreFeedFragment extends Fragment {
+    public static final String TAG = "ExploreFeedFragment";
 
     List<Listing> listings;
     ListingsAdapter adapter;
 
     FloatingActionButton floatingButton;
 
-    public ListingsFragment() {
+    public ExploreFeedFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_listings, container, false);
+        // Inflates the layout for the fragment
+        return inflater.inflate(R.layout.fragment_explore_feed, container, false);
     }
 
     @Override

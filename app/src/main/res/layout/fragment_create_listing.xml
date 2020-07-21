@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.CreateListingFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        >
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="30dp"
+                android:paddingTop="60dp"
+                android:paddingBottom="20dp"
+                android:text="Let's create your listing"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:id="@+id/layoutTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <ImageView
+                android:id="@+id/checkboxTitle"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="15dp"
+                app:srcCompat="@drawable/check" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/checkboxTitle"
+                android:text="Title"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/checkboxTitle"
+                android:layout_marginTop="15dp"
+                android:text="Olympus OM-D" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/edit1"
+                android:backgroundTint="#21000000" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="?android:attr/listDivider" />
+
+        <RelativeLayout
+            android:id="@+id/layoutDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            >
+
+            <ImageView
+                android:id="@+id/checkboxDescription"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="15dp"
+                app:srcCompat="@drawable/check" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/checkboxDescription"
+                android:text="Description"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/checkboxDescription"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:lineSpacingExtra="5dp"
+                android:text="A camera designed with speed, versatility, and portability in mind, the Olympus OM-D E-M1 Mark III is a well-rounded Micro Four Thirds mirrorless camera suitable for a variety of stills and video needs." />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/edit1"
+                android:backgroundTint="#21000000" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="?android:attr/listDivider" />
+
+        <RelativeLayout
+            android:id="@+id/layoutPhotos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            >
+
+            <ImageView
+                android:id="@+id/checkboxPhotos"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="15dp"
+                app:srcCompat="@drawable/check" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/checkboxPhotos"
+                android:text="Photos"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:textStyle="italic" />
+
+            <ImageView
+                android:id="@+id/ivListingPhoto"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/checkboxPhotos"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/stock_camera" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/edit1"
+                android:backgroundTint="#21000000" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="?android:attr/listDivider" />
+
+        <RelativeLayout
+            android:id="@+id/layoutLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            >
+
+            <ImageView
+                android:id="@+id/checkboxLocation"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="15dp"
+                app:srcCompat="@drawable/check" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/checkboxLocation"
+                android:text="Location"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:textStyle="italic" />
+
+            <RelativeLayout
+                android:id="@+id/layoutCurrentLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/checkboxLocation"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="-2dp">
+
+                <ImageView
+                    android:id="@+id/locationPin"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    app:srcCompat="@drawable/location" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@id/locationPin"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Current location" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/edit1"
+                android:backgroundTint="#21000000" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="?android:attr/listDivider" />
+
+        <RelativeLayout
+            android:id="@+id/layoutPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            >
+
+            <ImageView
+                android:id="@+id/checkboxPrice"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="15dp"
+                app:srcCompat="@drawable/check" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/checkboxPrice"
+                android:text="Price"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/checkboxPrice"
+                android:layout_marginTop="15dp"
+                android:text="$29 / day" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/edit1"
+                android:backgroundTint="#21000000" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="?android:attr/listDivider" />
+
+        <Button
+            android:id="@+id/btnBegin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:background="@color/colorAccent"
+            android:text="Create Listing"
+            android:textColor="@color/white"
+            android:layout_gravity="right"
+            android:layout_marginEnd="30dp"
+            android:paddingHorizontal="10dp"
+            />
+
+    </LinearLayout>
+</ScrollView>
