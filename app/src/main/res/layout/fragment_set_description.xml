@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.CreateListingFragment"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="true"
+        android:clipChildren="true"
+        >
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnSetDescription"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="200"
+            app:counterOverflowTextAppearance="@style/counterOverride"
+            app:counterTextAppearance="@style/counterText"
+            app:hintEnabled="false">
+
+            <EditText
+                android:id="@+id/etDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:backgroundTint="@color/colorAccent"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Description"
+                android:textColor="#91000000"
+                android:inputType="textMultiLine"
+                android:minLines="4"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnSetDescription"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/text_box_color_accent"
+            android:radius="5dp"
+            android:text="Set"
+            android:textColor="@android:color/white"
+            />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

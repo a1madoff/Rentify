@@ -1,5 +1,6 @@
 package com.example.rentingapp.fragments;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.rentingapp.R;
+import com.parse.ParseFile;
 
-public class CreateListingFragment extends Fragment implements SetTitleDialogFragment.EditTitleDialogListener {
+public class CreateListingFragment extends Fragment implements SetTitleDialogFragment.EditTitleDialogListener, SetDescriptionDialogFragment.EditDescriptionDialogListener, AddPhotoDialogFragment.AddPhotoDialogListener {
     RelativeLayout layoutTitle;
     TextView tvTitle;
     ImageView checkboxTitle;
@@ -51,9 +53,10 @@ public class CreateListingFragment extends Fragment implements SetTitleDialogFra
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // TODO: remember to reset padding once title has been added
+        // TODO: reset padding once title has been added
+        // TODO: reopening set text box fills with already inputted text
         float scale = getResources().getDisplayMetrics().density;
-        int paddingTop = (int) (30*scale + 0.5f);
+        int paddingTop = (int) (40*scale + 0.5f);
         int paddingBottom = (int) (20*scale + 0.5f);
 
         // Title
@@ -102,6 +105,26 @@ public class CreateListingFragment extends Fragment implements SetTitleDialogFra
             }
         });
 
+        layoutDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getFragmentManager();
+                SetDescriptionDialogFragment setDescriptionDialogFragment = new SetDescriptionDialogFragment();
+                setDescriptionDialogFragment.setTargetFragment(CreateListingFragment.this, 300);
+                setDescriptionDialogFragment.show(fm, "fragment_edit_name");
+            }
+        });
+
+        layoutPhotos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getFragmentManager();
+                AddPhotoDialogFragment addPhotoDialogFragment = new AddPhotoDialogFragment();
+                addPhotoDialogFragment.setTargetFragment(CreateListingFragment.this, 300);
+                addPhotoDialogFragment.show(fm, "fragment_edit_name");
+            }
+        });
+
     }
 
     @Override
@@ -109,5 +132,44 @@ public class CreateListingFragment extends Fragment implements SetTitleDialogFra
         tvTitle.setVisibility(View.VISIBLE);
         tvTitle.setText(title);
         checkboxTitle.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onFinishDescriptionDialog(String description) {
+        tvDescription.setVisibility(View.VISIBLE);
+        tvDescription.setText(description);
+        checkboxDescription.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onFinishPhotoDialog(Bitmap photoBitmap, ParseFile photoParseFile) {
+        ivListingPhoto.setVisibility(View.VISIBLE);
+        ivListingPhoto.setImageBitmap(photoBitmap);
+        checkboxPhotos.setVisibility(View.VISIBLE);
+
+        //    private void savePost(ParseUser currentUser, File photoFile) {
+//        Post post = new Post();
+//        post.setDescription(description);
+//        if (bitmapdata == null) {
+//            post.setImage(new ParseFile(photoFile));
+//        } else {
+//            post.setImage(new ParseFile(bitmapdata));
+//        }
+//        post.setUser(currentUser);
+//        post.saveInBackground(new SaveCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                if (e != null) {
+//                    Log.e(TAG, "Error while saving", e);
+//                    Toast.makeText(getContext(), "Error while saving!", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                Log.i(TAG, "Post save was successful!");
+//                etDescription.setText("");
+//                ivPostImage.setImageResource(0);
+//                pbLoading.setVisibility(ProgressBar.INVISIBLE);
+//            }
+//        });
+//    }
     }
 }

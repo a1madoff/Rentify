@@ -311,16 +311,15 @@
             android:background="?android:attr/listDivider" />
 
         <Button
-            android:id="@+id/btnBegin"
+            android:id="@+id/btnCreate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="60dp"
             android:background="@color/colorAccent"
-            android:text="Create Listing"
+            android:text="Create"
             android:textColor="@color/white"
             android:layout_gravity="right"
-            android:layout_marginEnd="30dp"
-            android:paddingHorizontal="10dp"
+            android:layout_marginEnd="50dp"
             />
 
     </LinearLayout>

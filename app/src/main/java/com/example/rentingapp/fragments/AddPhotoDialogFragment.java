@@ -1,96 +1,123 @@
-package com.example.rentingapp;
+package com.example.rentingapp.fragments;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
-
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.ImageDecoder;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+
+import com.example.rentingapp.R;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
-public class AddImageActivity extends AppCompatActivity {
-    public static final String TAG = "AddImageActivity";
+import static android.app.Activity.RESULT_OK;
+
+public class AddPhotoDialogFragment extends DialogFragment {
+    public static final String TAG = "AddPhotoDialogFragment";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
     public final static int PICK_PHOTO_CODE = 1046;
 
-    private EditText etDescription;
-    private Button btnCaptureImage;
-    private ImageView ivPostImage;
-    private Button btnSubmit;
-    private Button btnLibrary;
-    private ProgressBar pbLoading;
+    Button btnSetPhoto;
+    ImageView ivUploadImage;
+    FloatingActionButton btnGallery;
+    FloatingActionButton btnCamera;
+    FloatingActionsMenu floatingMenu;
 
     private File photoFile;
     private String photoFileName = "photo.jpg";
     private byte[] bitmapdata;
+    Bitmap photoBitmap;
 
-    Context context;
+    public AddPhotoDialogFragment() {
+        // Required empty public constructor
+    }
+
+    public interface AddPhotoDialogListener {
+        void onFinishPhotoDialog(Bitmap photoBitmap, ParseFile photoParseFile);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_image);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        // Inflates the layout for the fragment
+        return inflater.inflate(R.layout.fragment_add_photo, container, false);
+    }
 
-        context = this;
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        etDescription = findViewById(R.id.etDescription);
-        btnCaptureImage = findViewById(R.id.btnCaptureImage);
-        ivPostImage = findViewById(R.id.ivPostImage);
-        btnSubmit = findViewById(R.id.btnSubmit);
-        btnLibrary = findViewById(R.id.btnLibrary);
-        pbLoading = findViewById(R.id.pbLoading);
+        btnSetPhoto = view.findViewById(R.id.btnSetPhoto);
+        ivUploadImage = view.findViewById(R.id.ivUploadImage);
+        btnGallery = view.findViewById(R.id.btnGallery);
+        btnCamera = view.findViewById(R.id.btnCamera);
+        floatingMenu = view.findViewById(R.id.floatingMenu);
 
-        btnCaptureImage.setOnClickListener(new View.OnClickListener() {
+        btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 launchCamera();
             }
         });
 
-        btnLibrary.setOnClickListener(new View.OnClickListener() {
+        btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 pickPhoto();
             }
         });
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
+        btnSetPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pbLoading.setVisibility(ProgressBar.VISIBLE);
-                String description = etDescription.getText().toString();
-                if (description.isEmpty()) {
-                    Toast.makeText(context, "Description cannot be empty", Toast.LENGTH_SHORT).show();
+//                pbLoading.setVisibility(ProgressBar.VISIBLE);
+                if ((photoFile == null && bitmapdata == null) || ivUploadImage.getDrawable() == null) {
+                    Toast.makeText(getContext(), "There is no image!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if ((photoFile == null && bitmapdata == null) || ivPostImage.getDrawable() == null) {
-                    Toast.makeText(context, "There is no image!", Toast.LENGTH_SHORT).show();
-                    return;
+                AddPhotoDialogListener listener = (AddPhotoDialogListener) getTargetFragment();
+
+                ParseFile parseFile;
+                if (bitmapdata == null) {
+                    parseFile = new ParseFile(photoFile);
+                } else {
+                    parseFile = new ParseFile(bitmapdata);
                 }
 
-                ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(description, currentUser, photoFile);
+                listener.onFinishPhotoDialog(photoBitmap, parseFile);
+                // Closes the dialog and returns back to the parent activity
+                dismiss();
             }
         });
     }
@@ -102,10 +129,10 @@ public class AddImageActivity extends AppCompatActivity {
         photoFile = getPhotoFileUri(photoFileName);
 
         // Wraps File object into a content provider
-        Uri fileProvider = FileProvider.getUriForFile(context, "com.codepath.fileprovider.rentingapp", photoFile);
+        Uri fileProvider = FileProvider.getUriForFile(getContext(), "com.codepath.fileprovider.rentingapp", photoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
-        if (intent.resolveActivity(context.getPackageManager()) != null) {
+        if (intent.resolveActivity(getContext().getPackageManager()) != null) {
             // Starts the image capture intent to take photo
             startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
         }
@@ -116,7 +143,7 @@ public class AddImageActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-        if (intent.resolveActivity(context.getPackageManager()) != null) {
+        if (intent.resolveActivity(getContext().getPackageManager()) != null) {
             // Brings up gallery to select a photo
             startActivityForResult(intent, PICK_PHOTO_CODE);
         }
@@ -129,10 +156,14 @@ public class AddImageActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // Camera photo is on disk
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                photoBitmap = takenImage;
+
                 // Loads the taken image into the preview
-                ivPostImage.setImageBitmap(takenImage);
+                ivUploadImage.setImageTintList(null);
+                ivUploadImage.setImageBitmap(takenImage);
+                floatingMenu.collapseImmediately();
             } else { // Result was a failure
-                Toast.makeText(context, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -141,8 +172,11 @@ public class AddImageActivity extends AppCompatActivity {
 
             // Loads the image located at photoUri into selectedImage
             Bitmap selectedImage = loadFromUri(photoUri);
+            photoBitmap = selectedImage;
             // Loads the taken image into the preview
-            ivPostImage.setImageBitmap(selectedImage);
+            ivUploadImage.setImageTintList(null);
+            ivUploadImage.setImageBitmap(selectedImage);
+            floatingMenu.collapseImmediately();
 
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             selectedImage.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
@@ -154,10 +188,10 @@ public class AddImageActivity extends AppCompatActivity {
     public File getPhotoFileUri(String fileName) {
         // Gets safe storage directory for photos
         // Uses `getExternalFilesDir` on Context to access package-specific directories
-        File mediaStorageDir = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), TAG);
+        File mediaStorageDir = new File(getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES), TAG);
 
         // Creates the storage directory if it does not exist
-        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {
             Log.d(TAG, "failed to create directory");
         }
 
@@ -169,42 +203,17 @@ public class AddImageActivity extends AppCompatActivity {
         Bitmap image = null;
         try {
             // Checks version of Android on device
-            if(Build.VERSION.SDK_INT > 27){
+            if (Build.VERSION.SDK_INT > 27) {
                 // Uses the new decodeBitmap method for newer versions of Android
-                ImageDecoder.Source source = ImageDecoder.createSource(context.getContentResolver(), photoUri);
+                ImageDecoder.Source source = ImageDecoder.createSource(getContext().getContentResolver(), photoUri);
                 image = ImageDecoder.decodeBitmap(source);
             } else {
                 // Supports older versions of Android by using getBitmap
-                image = MediaStore.Images.Media.getBitmap(context.getContentResolver(), photoUri);
+                image = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), photoUri);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return image;
-    }
-
-    private void savePost(String description, ParseUser currentUser, File photoFile) {
-//        Post post = new Post();
-//        post.setDescription(description);
-//        if (bitmapdata == null) {
-//            post.setImage(new ParseFile(photoFile));
-//        } else {
-//            post.setImage(new ParseFile(bitmapdata));
-//        }
-//        post.setUser(currentUser);
-//        post.saveInBackground(new SaveCallback() {
-//            @Override
-//            public void done(ParseException e) {
-//                if (e != null) {
-//                    Log.e(TAG, "Error while saving", e);
-//                    Toast.makeText(context, "Error while saving!", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                Log.i(TAG, "Post save was successful!");
-//                etDescription.setText("");
-//                ivPostImage.setImageResource(0);
-//                pbLoading.setVisibility(ProgressBar.INVISIBLE);
-//            }
-//        });
     }
 }

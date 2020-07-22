@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.AddPhotoDialogFragment"
+    android:layout_width="match_parent"
+    android:minWidth="350dp"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp">
+
+    <RelativeLayout
+        android:gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
+        >
+
+        <Button
+            android:id="@+id/btnSetPhoto"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/text_box_color_accent"
+            android:text="Set photo"
+            android:textColor="@android:color/white"
+            />
+
+        <ImageView
+            android:id="@+id/ivUploadImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@id/btnSetPhoto"
+            android:layout_alignEnd="@+id/btnSetPhoto"
+            android:layout_marginEnd="100dp"
+            android:scaleType="centerCrop"
+            android:tint="#E0FFFFFF"
+            app:srcCompat="@drawable/dashed_box" />
+
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/floatingMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/btnSetPhoto"
+            android:layout_marginTop="-5dp"
+            android:layout_marginEnd="20dp"
+            android:layout_toStartOf="@+id/ivUploadImage"
+            app:fab_addButtonColorNormal="@color/colorAccent"
+            app:fab_addButtonColorPressed="@color/colorAccent"
+            app:fab_addButtonSize="mini"
+            fab:fab_expandDirection="down">
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnGallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_colorNormal="@android:color/white"
+                app:fab_colorPressed="@android:color/white"
+                app:fab_size="mini"
+                fab:fab_icon="@drawable/gallery" />
+
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnCamera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_colorNormal="@android:color/white"
+                app:fab_colorPressed="@android:color/white"
+                app:fab_size="mini"
+                fab:fab_icon="@drawable/camera" />
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
