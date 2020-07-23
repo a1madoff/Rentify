@@ -97,7 +97,7 @@ public class ListingsAdapter extends RecyclerView.Adapter<ListingsAdapter.ViewHo
                     .into(ivListingImage);
 
             ratingBar.setRating((float) listing.getRating());
-            tvPrice.setText(String.format("$%s/day", listing.getPrice()));
+            tvPrice.setText(String.format("$%s", listing.getPrice()));
             tvTtitle.setText(listing.getTitle());
 
         }

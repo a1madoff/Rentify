@@ -16,13 +16,15 @@ public class Listing extends ParseObject {
     public static final String KEY_RATING = "rating";
     public static final String KEY_COORDINATES = "coordinates";
     public static final String KEY_TITLE = "title";
+    public static final String KEY_DESCRIPTION = "description";
+    public static final String KEY_FULLADDRESS = "fullAddress";
+    public static final String KEY_LOCALITY = "locality";
 
     public Listing() {}
 
     public int getPrice() {
         return getInt(KEY_PRICE);
     }
-
     public void setPrice(int price) {
         put(KEY_PRICE, price);
     }
@@ -30,7 +32,6 @@ public class Listing extends ParseObject {
     public ParseUser getSeller() {
         return getParseUser(KEY_SELLER);
     }
-
     public void setSeller(ParseUser seller) {
         put(KEY_SELLER, seller);
     }
@@ -38,7 +39,6 @@ public class Listing extends ParseObject {
     public ParseFile getImage() {
         return getParseFile(KEY_IMAGE);
     }
-
     public void setImage(ParseFile parseFile) {
         put(KEY_IMAGE, parseFile);
     }
@@ -46,7 +46,6 @@ public class Listing extends ParseObject {
     public double getRating() {
         return getDouble(KEY_RATING);
     }
-
     public void setRating(double rating) {
         put(KEY_RATING, rating);
     }
@@ -54,7 +53,6 @@ public class Listing extends ParseObject {
     public ParseGeoPoint getCoordinates() {
         return getParseGeoPoint(KEY_COORDINATES);
     }
-
     public void setCoordinates(ParseGeoPoint geoPoint) {
         put(KEY_COORDINATES, geoPoint);
     }
@@ -62,8 +60,30 @@ public class Listing extends ParseObject {
     public String getTitle() {
         return getString(KEY_TITLE);
     }
-
     public void setTitle(String title) {
         put(KEY_TITLE, title);
     }
+
+    public String getDescription() {
+        return getString(KEY_DESCRIPTION);
+    }
+    public void setDescription(String description) {
+        put(KEY_DESCRIPTION, description);
+    }
+
+    public String getfullAddress() {
+        return getString(KEY_FULLADDRESS);
+    }
+    public void setfullAddress(String fullAddress) {
+        put(KEY_FULLADDRESS, fullAddress);
+    }
+
+    public String getLocality() {
+        return getString(KEY_LOCALITY);
+    }
+    public void setLocality(String locality) {
+        put(KEY_LOCALITY, locality);
+    }
+
+
 }

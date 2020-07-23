@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,10 +51,15 @@ public class SetDescriptionDialogFragment extends DialogFragment {
         btnSetDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditDescriptionDialogListener listener = (EditDescriptionDialogListener) getTargetFragment();
-                listener.onFinishDescriptionDialog(etDescription.getText().toString());
-                // Closes the dialog and returns back to the parent activity
-                dismiss();
+                String text = etDescription.getText().toString();
+                if (!text.isEmpty()) {
+                    EditDescriptionDialogListener listener = (EditDescriptionDialogListener) getTargetFragment();
+                    listener.onFinishDescriptionDialog(text);
+                    // Closes the dialog and returns back to the parent activity
+                    dismiss();
+                } else {
+                    Toast.makeText(getContext(), "Description cannot be empty!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

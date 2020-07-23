@@ -66,8 +66,8 @@
                 android:layout_below="@id/checkboxTitle"
                 android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif-light"
-                android:text="Olympus OM-D"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:text="Olympus OM-D" />
 
             <ImageView
                 android:layout_width="20dp"
@@ -121,7 +121,7 @@
                 android:layout_marginEnd="30dp"
                 android:fontFamily="sans-serif-light"
                 android:lineSpacingExtra="5dp"
-                android:text="A camera designed with speed, versatility, and portability in mind, the Olympus OM-D E-M1 Mark III is a well-rounded Micro Four Thirds mirrorless camera suitable for a variety of stills and video needs."
+                tools:text="A camera designed with speed, versatility, and portability in mind, the Olympus OM-D E-M1 Mark III is a well-rounded Micro Four Thirds mirrorless camera suitable for a variety of stills and video needs."
                 android:textSize="16sp" />
 
             <ImageView
@@ -172,9 +172,9 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_below="@id/checkboxPhotos"
-                android:scaleType="centerCrop"
                 android:layout_marginTop="20dp"
-                app:srcCompat="@drawable/stock_camera" />
+                android:scaleType="centerCrop"
+                tools:srcCompat="@drawable/stock_camera" />
 
             <ImageView
                 android:layout_width="20dp"
@@ -228,7 +228,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="30dp"
                     android:fontFamily="sans-serif-light"
-                    android:text="900 High School Way, Mountain View, CA 94041, USA"
+                    tools:text="900 High School Way, Mountain View, CA 94041, USA"
                     android:lineSpacingExtra="5dp"
                     android:textSize="16sp" />
 
@@ -282,7 +282,7 @@
                 android:layout_below="@+id/checkboxPrice"
                 android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif-light"
-                android:text="$29 / day"
+                tools:text="$29 / day"
                 android:textSize="16sp"
                 />
 
@@ -305,10 +305,10 @@
 
         <Button
             android:id="@+id/btnCreate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="55dp"
             android:layout_marginTop="60dp"
-            android:background="@color/colorAccent"
+            android:backgroundTint="@color/colorAccent"
             android:text="Create"
             android:textColor="@color/white"
             android:layout_gravity="right"

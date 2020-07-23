@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -74,11 +75,15 @@ public class SetPriceDialogFragment extends DialogFragment {
         btnSetPrice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditPriceDialogListener listener = (EditPriceDialogListener) getTargetFragment();
-                listener.onFinishPriceDialog(etPrice.getText().toString());
-                Log.i("yeet", etPrice.getText().toString());
-                // Closes the dialog and returns back to the parent activity
-                dismiss();
+                String price = etPrice.getText().toString();
+                if (!price.equals("$")) {
+                    EditPriceDialogListener listener = (EditPriceDialogListener) getTargetFragment();
+                    listener.onFinishPriceDialog(price);
+                    // Closes the dialog and returns back to the parent activity
+                    dismiss();
+                } else {
+                    Toast.makeText(getContext(), "Price cannot be empty!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

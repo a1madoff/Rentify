@@ -102,7 +102,7 @@ public class AddPhotoDialogFragment extends DialogFragment {
             public void onClick(View view) {
 //                pbLoading.setVisibility(ProgressBar.VISIBLE);
                 if ((photoFile == null && bitmapdata == null) || ivUploadImage.getDrawable() == null) {
-                    Toast.makeText(getContext(), "There is no image!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "No image selected", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

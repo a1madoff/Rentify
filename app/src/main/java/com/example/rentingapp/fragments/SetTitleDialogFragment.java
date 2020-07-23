@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,10 +51,15 @@ public class SetTitleDialogFragment extends DialogFragment {
         btnSetTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditTitleDialogListener listener = (EditTitleDialogListener) getTargetFragment();
-                listener.onFinishTitleDialog(etTitle.getText().toString());
-                // Closes the dialog and returns back to the parent activity
-                dismiss();
+                String text = etTitle.getText().toString();
+                if (!text.isEmpty()) {
+                    EditTitleDialogListener listener = (EditTitleDialogListener) getTargetFragment();
+                    listener.onFinishTitleDialog(text);
+                    // Closes the dialog and returns back to the parent activity
+                    dismiss();
+                } else {
+                    Toast.makeText(getContext(), "Title cannot be empty!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

@@ -179,10 +179,14 @@ public class SetLocationDialogFragment extends DialogFragment {
         btnSetLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditLocationDialogListener listener = (EditLocationDialogListener) getTargetFragment();
-                listener.onFinishLocationDialog(geoPoint, fullAddress, locality);
-                // Closes the dialog and returns back to the parent activity
-                dismiss();
+                if (fullAddress != null) {
+                    EditLocationDialogListener listener = (EditLocationDialogListener) getTargetFragment();
+                    listener.onFinishLocationDialog(geoPoint, fullAddress, locality);
+                    // Closes the dialog and returns back to the parent activity
+                    dismiss();
+                } else {
+                    Toast.makeText(getContext(), "Location cannot be empty!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
