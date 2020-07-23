@@ -14,19 +14,19 @@
         android:gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         >
 
         <Button
             android:id="@+id/btnSetPhoto"
-            android:layout_width="100dp"
+            android:layout_width="70dp"
             android:layout_height="45dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/text_box_color_accent"
-            android:text="Set photo"
+            android:text="Set"
             android:textColor="@android:color/white"
             />
 
@@ -36,7 +36,7 @@
             android:layout_height="150dp"
             android:layout_below="@id/btnSetPhoto"
             android:layout_alignEnd="@+id/btnSetPhoto"
-            android:layout_marginEnd="100dp"
+            android:layout_marginEnd="90dp"
             android:scaleType="centerCrop"
             android:tint="#E0FFFFFF"
             app:srcCompat="@drawable/dashed_box" />

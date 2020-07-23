@@ -46,7 +46,7 @@
 
         <Button
             android:id="@+id/btnSetTitle"
-            android:layout_width="90dp"
+            android:layout_width="70dp"
             android:layout_height="40dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -55,7 +55,7 @@
             android:layout_marginEnd="10dp"
             android:background="@drawable/text_box_color_accent"
             android:radius="5dp"
-            android:text="Set title"
+            android:text="Set"
             android:textColor="@android:color/white" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -1,7 +1,11 @@
 package com.example.rentingapp.fragments;
 
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +20,13 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.rentingapp.R;
 import com.parse.ParseFile;
+import com.parse.ParseGeoPoint;
 
-public class CreateListingFragment extends Fragment implements SetTitleDialogFragment.EditTitleDialogListener, SetDescriptionDialogFragment.EditDescriptionDialogListener, AddPhotoDialogFragment.AddPhotoDialogListener {
+public class CreateListingFragment extends Fragment implements
+        SetTitleDialogFragment.EditTitleDialogListener, SetDescriptionDialogFragment.EditDescriptionDialogListener,
+        AddPhotoDialogFragment.AddPhotoDialogListener, SetLocationDialogFragment.EditLocationDialogListener,
+        SetPriceDialogFragment.EditPriceDialogListener {
+
     RelativeLayout layoutTitle;
     TextView tvTitle;
     ImageView checkboxTitle;
@@ -31,7 +40,7 @@ public class CreateListingFragment extends Fragment implements SetTitleDialogFra
     ImageView checkboxPhotos;
 
     RelativeLayout layoutLocation;
-    RelativeLayout layoutCurrentLocation;
+    TextView tvLocation;
     ImageView checkboxLocation;
 
     RelativeLayout layoutPrice;
@@ -83,8 +92,8 @@ public class CreateListingFragment extends Fragment implements SetTitleDialogFra
 
         // Location
         layoutLocation = view.findViewById(R.id.layoutLocation);
-        layoutCurrentLocation =  view.findViewById(R.id.layoutCurrentLocation);
-        layoutCurrentLocation.setVisibility(View.GONE);
+        tvLocation = view.findViewById(R.id.tvLocation);
+        tvLocation.setVisibility(View.GONE);
         checkboxLocation = view.findViewById(R.id.checkboxLocation);
         checkboxLocation.setVisibility(View.GONE);
 
@@ -125,6 +134,26 @@ public class CreateListingFragment extends Fragment implements SetTitleDialogFra
             }
         });
 
+        layoutLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getFragmentManager();
+                SetLocationDialogFragment setLocationDialogFragment = new SetLocationDialogFragment();
+                setLocationDialogFragment.setTargetFragment(CreateListingFragment.this, 300);
+                setLocationDialogFragment.show(fm, "fragment_edit_name");
+            }
+        });
+
+        layoutPrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getFragmentManager();
+                SetPriceDialogFragment setPriceDialogFragment = new SetPriceDialogFragment();
+                setPriceDialogFragment.setTargetFragment(CreateListingFragment.this, 300);
+                setPriceDialogFragment.show(fm, "fragment_edit_name");
+            }
+        });
+
     }
 
     @Override
@@ -143,11 +172,35 @@ public class CreateListingFragment extends Fragment implements SetTitleDialogFra
 
     @Override
     public void onFinishPhotoDialog(Bitmap photoBitmap, ParseFile photoParseFile) {
+        // TODO: photoParseFile will be used when saving listing
         ivListingPhoto.setVisibility(View.VISIBLE);
         ivListingPhoto.setImageBitmap(photoBitmap);
         checkboxPhotos.setVisibility(View.VISIBLE);
+    }
 
-        //    private void savePost(ParseUser currentUser, File photoFile) {
+    @Override
+    public void onFinishLocationDialog(ParseGeoPoint geoPoint, String fullAddress, String locality) {
+        // TODO: geoPoint/locality will be used when saving listing
+        tvLocation.setVisibility(View.VISIBLE);
+        tvLocation.setText(fullAddress);
+        checkboxLocation.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onFinishPriceDialog(String dollarSignedPrice) {
+        tvPrice.setVisibility(View.VISIBLE);
+        checkboxPrice.setVisibility(View.VISIBLE);
+
+        String boldText = dollarSignedPrice;
+        String normalText = " / day";
+        SpannableString str = new SpannableString(boldText + normalText);
+        str.setSpan(new StyleSpan(Typeface.BOLD), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvPrice.setText(str);
+
+    }
+}
+
+//    private void savePost(ParseUser currentUser, File photoFile) {
 //        Post post = new Post();
 //        post.setDescription(description);
 //        if (bitmapdata == null) {
@@ -171,5 +224,3 @@ public class CreateListingFragment extends Fragment implements SetTitleDialogFra
 //            }
 //        });
 //    }
-    }
-}
