@@ -21,8 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/stock_camera">
-            </ImageView>
+                tools:srcCompat="@drawable/stock_camera" />
 
             <ImageView
                 android:id="@+id/ivHeart"
@@ -42,10 +41,10 @@
                 android:layout_below="@+id/ivListingImage"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
-                android:text="Olympus OM-D"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@android:color/black"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                tools:text="Olympus OM-D" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
@@ -97,11 +96,11 @@
                 android:layout_below="@id/divider1"
                 android:layout_marginStart="42dp"
                 android:layout_marginEnd="52dp"
+                android:justificationMode="inter_word"
                 android:lineSpacingExtra="8sp"
-                android:text="A camera designed with speed, versatility, and portability in mind, the Olympus OM-D E-M1 Mark III is a well-rounded Micro Four Thirds mirrorless camera suitable for a variety of stills and video needs."
                 android:textColor="#B1000000"
                 android:textStyle="italic"
-                android:justificationMode="inter_word"/>
+                tools:text="A camera designed with speed, versatility, and portability in mind, the Olympus OM-D E-M1 Mark III is a well-rounded Micro Four Thirds mirrorless camera suitable for a variety of stills and video needs." />
 
             <View
                 android:id="@+id/divider2"
@@ -172,19 +171,19 @@
                 android:layout_below="@id/tvListedBy"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                app:srcCompat="@drawable/profile" />
+                tools:srcCompat="@drawable/profile" />
 
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/ivProfilePicture"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
                 android:layout_toEndOf="@id/ivProfilePicture"
-                android:text="Alex Madoff"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="15dp"/>
+                tools:text="Alex Madoff" />
 
             <TextView
                 android:id="@+id/tvTotalNumReviews"
@@ -262,9 +261,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
-            android:text="$29 / day"
-            android:textSize="16sp">
-        </TextView>
+            android:textSize="16sp"
+            tools:text="$29 / day" />
 
         <Button
             android:layout_width="wrap_content"

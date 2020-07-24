@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
@@ -18,38 +19,35 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
-            android:contentDescription="@string/profile_me"
-            app:srcCompat="@drawable/random_prof"
             android:layout_marginEnd="5dp"
-            />
+            android:contentDescription="@string/profile_me"
+            tools:srcCompat="@drawable/random_prof" />
 
         <TextView
             android:id="@+id/tvNameRenter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
             android:layout_toStartOf="@+id/ivProfileRenter"
             android:ellipsize="end"
             android:lines="1"
-            android:text="John S."
             android:textSize="14sp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="5dp"
-            />
+            tools:text="John S." />
 
         <TextView
             android:id="@+id/tvBodyRenter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvNameRenter"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="10dp"
             android:layout_toStartOf="@+id/ivProfileRenter"
             android:ellipsize="end"
             android:lines="1"
-            android:text="Hello!"
             android:textColor="@android:color/black"
             android:textSize="14sp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="2dp"
-            />
+            tools:text="Hello!" />
 
         <!--        <TextView-->
         <!--            android:id="@+id/tvDate"-->
@@ -74,38 +72,35 @@
             android:id="@+id/ivProfileSeller"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:contentDescription="@string/profile_me"
-            app:srcCompat="@drawable/profile"
             android:layout_marginStart="5dp"
-            />
+            android:contentDescription="@string/profile_me"
+            tools:srcCompat="@drawable/profile" />
 
         <TextView
             android:id="@+id/tvNameSeller"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/ivProfileSeller"
             android:ellipsize="end"
             android:lines="1"
-            android:text="Alex M."
             android:textSize="14sp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            />
+            tools:text="Alex M." />
 
         <TextView
             android:id="@+id/tvBodySeller"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/ivProfileSeller"
             android:layout_below="@id/tvNameSeller"
-            android:ellipsize="end"
-            android:lines="1"
-            android:text="Hello!"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="2dp"
-            />
+            android:layout_toEndOf="@+id/ivProfileSeller"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            tools:text="Hello!" />
 
         <!--        <TextView-->
         <!--            android:id="@+id/tvDate"-->

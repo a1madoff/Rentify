@@ -80,6 +80,7 @@ public class ExploreFeedFragment extends Fragment {
         // Specifies which class to query
         ParseQuery<Listing> query = ParseQuery.getQuery(Listing.class);
         query.include(Listing.KEY_SELLER); // TODO: need to include seller?
+        query.orderByDescending("createdAt");
         query.findInBackground(new FindCallback<Listing>() {
             @Override
             public void done(List<Listing> listings, ParseException e) {

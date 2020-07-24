@@ -30,6 +30,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.ui.IconGenerator;
+import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
 
 import org.parceler.Parcels;
@@ -42,8 +43,13 @@ public class ListingDetailsActivity extends AppCompatActivity implements OnMapRe
     Listing listing;
     Context context;
 
+    ImageView ivListingImage;
+    TextView tvTitle;
+    TextView tvLocation;
+    TextView tvDescription;
     TextView tvPriceBottom;
     ImageView ivProfilePicture;
+    TextView tvName;
     Button btnMessage;
 
     @Override
@@ -58,21 +64,45 @@ public class ListingDetailsActivity extends AppCompatActivity implements OnMapRe
         context = this;
         listing = Parcels.unwrap(getIntent().getParcelableExtra("listing"));
 
+        ivListingImage = findViewById(R.id.ivListingImage);
+        tvTitle = findViewById(R.id.tvTitle);
+        tvLocation = findViewById(R.id.tvLocation);
+        tvDescription = findViewById(R.id.tvDescription);
         tvPriceBottom = findViewById(R.id.tvPriceBottom);
         ivProfilePicture = findViewById(R.id.ivProfilePicture);
+        tvName = findViewById(R.id.tvName);
         btnMessage = findViewById(R.id.btnMessage);
 
+        Glide.with(context)
+                .load(listing.getImage().getUrl())
+                .transform(new CenterCrop())
+                .into(ivListingImage);
 
-        String boldText = "$29 ";
-        String normalText = "/ day";
+        tvTitle.setText(listing.getTitle());
+        tvLocation.setText(listing.getLocality());
+        tvDescription.setText(listing.getDescription());
+
+
+        String boldText = String.format("$%d", listing.getPrice());
+        String normalText = " / day";
         SpannableString str = new SpannableString(boldText + normalText);
         str.setSpan(new StyleSpan(Typeface.BOLD), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         tvPriceBottom.setText(str);
 
-        Glide.with(context)
-                .load(R.drawable.profile)
-                .transform(new CircleCrop())
-                .into(ivProfilePicture);
+        ParseFile profilePicture = listing.getSeller().getParseFile("profilePicture");
+        if (profilePicture == null) {
+            Glide.with(context)
+                    .load(R.drawable.no_profile_picture)
+                    .transform(new CircleCrop())
+                    .into(ivProfilePicture);
+        } else {
+            Glide.with(context)
+                    .load(profilePicture.getUrl())
+                    .transform(new CircleCrop())
+                    .into(ivProfilePicture);
+        }
+
+        tvName.setText(String.format("%s %s", listing.getSeller().getString("firstName"), listing.getSeller().getString("lastName")));
 
         btnMessage.setOnClickListener(new View.OnClickListener() {
             @Override

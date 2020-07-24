@@ -46,6 +46,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         Message message = mMessages.get(position);
 //        final boolean fromMe = message.getUserId() != null && message.getUserId().equals(mUserId);
         boolean fromMe = message.getFromUser().getObjectId().equals(ParseUser.getCurrentUser().getObjectId());
+        String abbrevName = String.format("%s %s.", message.getFromUser().getString("firstName"), message.getFromUser().getString("lastName").charAt(0));
 
         ImageView profileView;
         if (fromMe) {
@@ -54,6 +55,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             holder.layoutSeller.setVisibility(View.GONE);
             profileView = holder.ivProfileRenter;
 
+            holder.tvNameRenter.setText(abbrevName);
             holder.tvBodyRenter.setText(message.getBody());
         } else {
             // Seller
@@ -61,6 +63,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             holder.layoutRenter.setVisibility(View.GONE);
             profileView = holder.ivProfileSeller;
 
+            holder.tvNameSeller.setText(abbrevName);
             holder.tvBodySeller.setText(message.getBody());
         }
 

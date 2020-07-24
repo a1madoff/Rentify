@@ -99,6 +99,7 @@ public class ListingsAdapter extends RecyclerView.Adapter<ListingsAdapter.ViewHo
             ratingBar.setRating((float) listing.getRating());
             tvPrice.setText(String.format("$%s", listing.getPrice()));
             tvTtitle.setText(listing.getTitle());
+            tvLocation.setText(listing.getLocality());
 
         }
 

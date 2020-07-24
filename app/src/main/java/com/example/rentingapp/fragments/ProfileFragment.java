@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,9 +14,11 @@ import androidx.fragment.app.Fragment;
 
 import com.example.rentingapp.LoginActivity;
 import com.example.rentingapp.R;
+import com.parse.ParseException;
 import com.parse.ParseUser;
 
 public class ProfileFragment extends Fragment {
+    TextView tvCurrUserFullName;
     Button btnLogout;
 
     public ProfileFragment() {
@@ -32,8 +35,18 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        tvCurrUserFullName = view.findViewById(R.id.tvCurrUserFullName);
         btnLogout = view.findViewById(R.id.btnLogout);
+
+        ParseUser currentUser = null;
+        try {
+            currentUser = ParseUser.getCurrentUser().fetch();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String fullName = String.format("%s %s", currentUser.getString("firstName"), currentUser.getString("lastName"));
+        tvCurrUserFullName.setText(fullName);
+
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

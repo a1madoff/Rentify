@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/stock_camera" />
+        tools:srcCompat="@drawable/stock_camera" />
 
     <ImageView
         android:id="@+id/ivHeart"
@@ -40,9 +40,9 @@
         android:elevation="5dp"
         android:fontFamily="sans-serif"
         android:gravity="center"
-        android:text="$29"
         android:textSize="12sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="$29" />
 <!--    android:background="@android:drawable/toast_frame"-->
 
 
@@ -51,11 +51,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivListingImage"
-        android:layout_marginTop="0dp"
         android:layout_marginStart="5dp"
-        android:text="Olympus OM-D"
+        android:layout_marginTop="0dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@android:color/black"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        tools:text="Olympus OM-D" />
 
     <RatingBar
         android:id="@+id/ratingBar"
@@ -85,8 +85,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ratingBar"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="5dp"
-        android:text="Sunnyside"
-        android:textColor="@android:color/black" />
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/black"
+        tools:text="Sunnyside" />
 </RelativeLayout>

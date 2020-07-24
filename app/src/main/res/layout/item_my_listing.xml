@@ -20,8 +20,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/stock_camera"
-        tools:layout_editor_absoluteX="4dp" />
+        tools:layout_editor_absoluteX="4dp"
+        tools:srcCompat="@drawable/stock_camera" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,17 +35,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="sans-serif-medium"
-            android:text="Olympus OM-D"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:text="Olympus OM-D" />
 
         <TextView
             android:id="@+id/tvMyListingPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvMyListingName"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="1dp"
-            android:text="$29 / day" />
+            android:layout_marginTop="10dp"
+            tools:text="$29 / day" />
 
     </RelativeLayout>
 </LinearLayout>

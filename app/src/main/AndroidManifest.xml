@@ -21,6 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".RentActivity"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/stock_camera" />
+        tools:srcCompat="@drawable/stock_camera" />
 
     <ImageView
         android:id="@+id/ivHeart"
