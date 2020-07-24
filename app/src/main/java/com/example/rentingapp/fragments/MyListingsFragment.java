@@ -114,6 +114,7 @@ public class MyListingsFragment extends Fragment {
         ParseQuery<Listing> query = ParseQuery.getQuery(Listing.class);
         query.include(Listing.KEY_SELLER);
         query.whereEqualTo(Listing.KEY_SELLER, ParseUser.getCurrentUser());
+        query.addDescendingOrder(Listing.KEY_CREATED_AT);
         query.findInBackground(new FindCallback<Listing>() {
             @Override
             public void done(List<Listing> listings, ParseException e) {
@@ -126,11 +127,13 @@ public class MyListingsFragment extends Fragment {
                     noListingsFound.setVisibility(View.VISIBLE);
                     btnCreateListing.setVisibility(View.VISIBLE);
                     rvMyListings.setVisibility(View.GONE);
+
+                    tvNumListings.setText("0 Listings");
                 } else {
                     adapter.addAll(listings);
 
                     if (listings.size() == 1) {
-                        tvNumListings.setText(R.string.one_listing);
+                        tvNumListings.setText("1 Listing");
                     } else {
                         tvNumListings.setText(String.format("%d Listings", listings.size()));
                     }

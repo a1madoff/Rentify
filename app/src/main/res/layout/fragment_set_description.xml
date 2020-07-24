@@ -26,7 +26,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="20dp"
             app:counterEnabled="true"
-            app:counterMaxLength="200"
+            app:counterMaxLength="250"
             app:counterOverflowTextAppearance="@style/counterOverride"
             app:counterTextAppearance="@style/counterText"
             app:hintEnabled="false">
@@ -42,6 +42,7 @@
                 android:gravity="start|top"
                 android:hint="Description"
                 android:textColor="#91000000"
+                android:lineSpacingExtra="5dp"
                 android:inputType="textMultiLine"
                 android:minLines="4"
                 />

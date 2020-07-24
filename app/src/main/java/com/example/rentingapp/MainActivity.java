@@ -8,10 +8,10 @@ import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.rentingapp.fragments.CreateListingFragment;
 import com.example.rentingapp.fragments.ExploreFeedFragment;
-import com.example.rentingapp.fragments.MessagesFragment;
+import com.example.rentingapp.fragments.InboxFragment;
 import com.example.rentingapp.fragments.MyListingsFragment;
+import com.example.rentingapp.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,15 +34,14 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new ExploreFeedFragment();
                         break;
                     case R.id.action_messages:
-                        fragment = new MessagesFragment();
+                        fragment = new InboxFragment();
                         break;
                     case R.id.action_listings:
                         fragment = new MyListingsFragment();
                         break;
                     case R.id.action_profile:
                     default:
-                        // TODO: update fragment
-                        fragment = new ExploreFeedFragment();
+                        fragment = new ProfileFragment();
                         break;
                 }
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();

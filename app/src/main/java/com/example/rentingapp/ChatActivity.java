@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
@@ -25,6 +26,7 @@ import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseAnonymousUtils;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -47,16 +49,17 @@ public class ChatActivity extends AppCompatActivity {
     RecyclerView rvChat;
     ArrayList<Message> mMessages;
     ChatAdapter mAdapter;
-    // Keep track of initial load to scroll to the bottom of the ListView
+    // Keeps track of initial load to scroll to the bottom of the ListView
     boolean mFirstLoad;
 
     Context context;
     Listing listing;
 
     ImageView ivListingImage;
+    TextView tvListingTitle;
     CardView cvTopCard;
 
-    // Create a handler which can run code periodically
+    // Creates a handler which refreshes the messages
     static final int POLL_INTERVAL = 1000; // milliseconds
     Handler myHandler = new android.os.Handler();
     Runnable mRefreshMessagesRunnable = new Runnable() {
@@ -81,6 +84,10 @@ public class ChatActivity extends AppCompatActivity {
                 .transform(new MultiTransformation(new CenterCrop(), new RoundedCornersTransformation(30, 10)))
                 .into(ivListingImage);
 
+
+        tvListingTitle = findViewById(R.id.tvListingTitle);
+        tvListingTitle.setText(listing.getTitle());
+
         cvTopCard = findViewById(R.id.cvTopCard);
         cvTopCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,38 +98,33 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        if (ParseUser.getCurrentUser() != null) {
-            startWithCurrentUser();
-        } else {
-            login();
-        }
+        startWithCurrentUser();
         myHandler.postDelayed(mRefreshMessagesRunnable, POLL_INTERVAL);
     }
 
-    // Get the userId from the cached currentUser object
+    // Gets the userId from the cached currentUser object
     void startWithCurrentUser() {
         setupMessagePosting();
     }
 
-    // Setup message field and posting
+    // Sets up message field and posting
     void setupMessagePosting() {
-        // Find the text field and button
+        // Finds the text field and button
         etMessage = findViewById(R.id.etMessage);
         btSend = findViewById(R.id.btSend);
         rvChat = findViewById(R.id.rvChat);
         mMessages = new ArrayList<>();
         mFirstLoad = true;
-        final String userId = ParseUser.getCurrentUser().getObjectId();
-        mAdapter = new ChatAdapter(ChatActivity.this, userId, mMessages);
+        mAdapter = new ChatAdapter(ChatActivity.this, mMessages);
         rvChat.setAdapter(mAdapter);
 
-        // associate the LayoutManager with the RecylcerView
+        // Associates the LayoutManager with the RecylcerView
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatActivity.this);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         rvChat.setLayoutManager(linearLayoutManager);
 
-        // When send button is clicked, create message object on Parse
+        // When send button is clicked, creates message object on Parse
         btSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,7 +132,9 @@ public class ChatActivity extends AppCompatActivity {
 
                 Message message = new Message();
                 message.setBody(data);
-                message.setUserId(ParseUser.getCurrentUser().getObjectId());
+                message.setListing(listing);
+                message.setFromUser(ParseUser.getCurrentUser());
+                message.setToUser(listing.getSeller());
                 message.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
@@ -144,24 +148,39 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-    // Query messages from Parse so we can load them into the chat adapter
+    // Queries messages from Parse to load them into the chat adapter
     void refreshMessages() {
-        // Construct query to execute
-        ParseQuery<Message> query = ParseQuery.getQuery(Message.class);
-        // Configure limit and sort order
-        query.setLimit(MAX_CHAT_MESSAGES_TO_SHOW);
+        // Constructs queries to execute
 
-        // get the latest 50 messages, order will show up newest to oldest of this group
-        query.orderByDescending("createdAt");
-        // Execute query to fetch all messages from Parse asynchronously
-        // This is equivalent to a SELECT query with SQL
-        query.findInBackground(new FindCallback<Message>() {
+        ParseQuery<Message> queryFromUser = ParseQuery.getQuery(Message.class);
+        queryFromUser.whereEqualTo(Message.KEY_LISTING, listing);
+        queryFromUser.whereEqualTo(Message.KEY_FROM_USER, ParseUser.getCurrentUser());
+
+        ParseQuery<Message> queryToUser = ParseQuery.getQuery(Message.class);
+        queryToUser.whereEqualTo(Message.KEY_LISTING, listing);
+        queryToUser.whereEqualTo(Message.KEY_TO_USER, ParseUser.getCurrentUser());
+
+        List<ParseQuery<Message>> queries = new ArrayList<>();
+        queries.add(queryFromUser);
+        queries.add(queryToUser);
+
+        ParseQuery<Message> combinedQuery = ParseQuery.or(queries);
+        combinedQuery.include(Message.KEY_FROM_USER);
+        combinedQuery.include(Message.KEY_TO_USER);
+
+        // Configures limit and sort order
+        combinedQuery.setLimit(MAX_CHAT_MESSAGES_TO_SHOW);
+
+        // Gets the latest 50 messages, order shows newest to oldest
+        combinedQuery.orderByDescending("createdAt");
+        // Executes query to fetch all messages from Parse asynchronously
+        combinedQuery.findInBackground(new FindCallback<Message>() {
             public void done(List<Message> messages, ParseException e) {
                 if (e == null) {
                     mMessages.clear();
                     mMessages.addAll(messages);
-                    mAdapter.notifyDataSetChanged(); // update adapter
-                    // Scroll to the bottom of the list on initial load
+                    mAdapter.notifyDataSetChanged(); // Updates adapter
+                    // Scrolls to the bottom of the list on initial load
                     if (mFirstLoad) {
                         rvChat.scrollToPosition(0);
                         mFirstLoad = false;
@@ -174,16 +193,16 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     // Create an anonymous user using ParseAnonymousUtils and set sUserId
-    void login() {
-        ParseAnonymousUtils.logIn(new LogInCallback() {
-            @Override
-            public void done(ParseUser user, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Anonymous login failed: ", e);
-                } else {
-                    startWithCurrentUser();
-                }
-            }
-        });
-    }
+//    void login() {
+//        ParseAnonymousUtils.logIn(new LogInCallback() {
+//            @Override
+//            public void done(ParseUser user, ParseException e) {
+//                if (e != null) {
+//                    Log.e(TAG, "Anonymous login failed: ", e);
+//                } else {
+//                    startWithCurrentUser();
+//                }
+//            }
+//        });
+//    }
 }

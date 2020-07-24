@@ -286,8 +286,16 @@ public class CreateListingFragment extends Fragment implements
 
                 Log.i(TAG, "Listing was saved successfully!");
 
-                // TODO: return to view my listings page, also clear fields from fragment?
-                // optional: add progress bar
+                // TODO: add progress bar
+
+                // Creates the transaction
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                // Configures the in and out animation files
+                ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                // Performs the fragment replacement
+                ft.replace(((ViewGroup) getView().getParent()).getId(), getTargetFragment(), "fragment");
+                // Starts the animated transition.
+                ft.commit();
             }
         });
     }

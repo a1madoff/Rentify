@@ -95,6 +95,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     // Reset icon for previously highlighted marker
                     setMarkerIcon(prevHighlightedMarker, false);
+                    prevHighlightedMarker.setZIndex(0.0f);
 
                     // Set marker icon for currently highlighted RecyclerView card
                     View snapView = snapHelper.findSnapView(layoutManager);
@@ -103,6 +104,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
 
                     Marker marker = listingMarkerHM.get(listing.getObjectId());
                     setMarkerIcon(marker, true);
+                    marker.setZIndex(1.0f);
 
                     prevHighlightedMarker = marker;
                 }
