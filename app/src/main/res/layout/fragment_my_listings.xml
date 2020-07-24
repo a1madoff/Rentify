@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingTop="20dp"
+    >
+
+    <Button
+        android:id="@+id/btnAddListing"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/add_thinnest"
+        android:backgroundTint="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/tvNumListings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnAddListing"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-medium"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#91000000"
+        tools:text="0 Listings" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tvNumListings"
+        android:layout_marginTop="20dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/noListingsFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider"
+        android:layout_marginTop="40dp"
+        android:text="No listings found. Create one now!"
+        android:textSize="18sp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardCreateListing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/noListingsFound"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@android:color/transparent"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        >
+
+        <Button
+            android:id="@+id/btnCreateListing"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:background="@color/colorAccent"
+            android:paddingHorizontal="20dp"
+            android:text="Create Listing"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            tools:visibility="visible" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMyListings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardCreateListing"
+        android:layout_marginTop="-10dp"
+        />
+</RelativeLayout>

@@ -21,16 +21,26 @@
             app:cardBackgroundColor="@color/colorAccent"
             app:cardElevation="0dp">
 
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/back"
+                android:backgroundTint="@color/white"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="30dp"
-                android:paddingTop="60dp"
+                android:paddingTop="70dp"
                 android:paddingBottom="20dp"
                 android:text="Let's create your listing"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="28sp"
                 android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
 

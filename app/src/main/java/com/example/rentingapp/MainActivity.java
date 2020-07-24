@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import com.example.rentingapp.fragments.CreateListingFragment;
 import com.example.rentingapp.fragments.ExploreFeedFragment;
 import com.example.rentingapp.fragments.MessagesFragment;
+import com.example.rentingapp.fragments.MyListingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new MessagesFragment();
                         break;
                     case R.id.action_listings:
-                        fragment = new CreateListingFragment();
+                        fragment = new MyListingsFragment();
                         break;
                     case R.id.action_profile:
                     default:

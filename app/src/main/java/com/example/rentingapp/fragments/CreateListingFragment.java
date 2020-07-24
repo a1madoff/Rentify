@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.rentingapp.R;
 import com.example.rentingapp.models.Listing;
@@ -59,6 +60,7 @@ public class CreateListingFragment extends Fragment implements
     ImageView checkboxPrice;
 
     Button btnCreate;
+    Button btnBack;
 
     // Listing fields
     int mPrice;
@@ -127,6 +129,7 @@ public class CreateListingFragment extends Fragment implements
         checkboxPrice.setVisibility(View.GONE);
 
         btnCreate = view.findViewById(R.id.btnCreate);
+        btnBack = view.findViewById(R.id.btnBack);
 
         layoutTitle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,6 +191,20 @@ public class CreateListingFragment extends Fragment implements
                 } else {
                     saveListing();
                 }
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Creates the transaction
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                // Configures the in and out animation files
+                ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                // Performs the fragment replacement
+                ft.replace(((ViewGroup) getView().getParent()).getId(), getTargetFragment(), "fragment");
+                // Starts the animated transition.
+                ft.commit();
             }
         });
     }
