@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="white">#FFFFFF</color>
-<!--    <color name="gray">#D3D3D3</color>-->
+    <color name="backgroundColor">#fffafafa</color>
+    <color name="errorRed">#e57373</color> <!--    ffff4444-->
+    <!--    <color name="gray">#D3D3D3</color>-->
 </resources>

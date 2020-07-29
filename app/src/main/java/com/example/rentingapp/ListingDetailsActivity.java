@@ -51,6 +51,7 @@ public class ListingDetailsActivity extends AppCompatActivity implements OnMapRe
     ImageView ivProfilePicture;
     TextView tvName;
     Button btnMessage;
+    Button btnRent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class ListingDetailsActivity extends AppCompatActivity implements OnMapRe
         ivProfilePicture = findViewById(R.id.ivProfilePicture);
         tvName = findViewById(R.id.tvName);
         btnMessage = findViewById(R.id.btnMessage);
+        btnRent = findViewById(R.id.btnRent);
 
         Glide.with(context)
                 .load(listing.getImage().getUrl())
@@ -108,6 +110,15 @@ public class ListingDetailsActivity extends AppCompatActivity implements OnMapRe
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ChatActivity.class);
+                intent.putExtra("listing", Parcels.wrap(listing));
+                context.startActivity(intent);
+            }
+        });
+
+        btnRent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, RentActivity.class);
                 intent.putExtra("listing", Parcels.wrap(listing));
                 context.startActivity(intent);
             }

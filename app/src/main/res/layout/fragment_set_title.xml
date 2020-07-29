@@ -26,7 +26,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="20dp"
             app:counterEnabled="true"
-            app:counterMaxLength="40"
+            app:counterMaxLength="20"
             app:counterOverflowTextAppearance="@style/counterOverride"
             app:counterTextAppearance="@style/counterText"
             app:hintEnabled="false">
