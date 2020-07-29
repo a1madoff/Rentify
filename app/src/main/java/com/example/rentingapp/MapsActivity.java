@@ -106,6 +106,17 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
                     setMarkerIcon(marker, true);
                     marker.setZIndex(1.0f);
 
+                    boolean markerInView = map.getProjection()
+                            .getVisibleRegion()
+                            .latLngBounds
+                            .contains(marker.getPosition());
+
+                    if (!markerInView) {
+                        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 15);
+//                    map.animateCamera(cameraUpdate, 1000, null);
+                        map.animateCamera(cameraUpdate);
+                    }
+
                     prevHighlightedMarker = marker;
                 }
             }

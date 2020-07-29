@@ -5,7 +5,9 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
@@ -32,6 +35,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.ui.IconGenerator;
 import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
+import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
@@ -123,6 +127,16 @@ public class ListingDetailsActivity extends AppCompatActivity implements OnMapRe
                 context.startActivity(intent);
             }
         });
+
+        if (listing.getSeller().getObjectId().equals(ParseUser.getCurrentUser().getObjectId())) {
+            btnMessage.setAlpha(0.4f);
+//            btnMessage.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(android.R.color.darker_gray)));
+            btnMessage.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.buttonDisabled)));
+            btnMessage.setEnabled(false);
+
+            btnRent.setAlpha(0.3f);
+            btnRent.setEnabled(false);
+        }
     }
 
     @Override
@@ -140,7 +154,7 @@ public class ListingDetailsActivity extends AppCompatActivity implements OnMapRe
         LatLng latLng = new LatLng(geoPoint.getLatitude(), geoPoint.getLongitude());
         map.addMarker(new MarkerOptions()
                 .position(latLng)
-                .title("Marker in Sydney")
+//                .title("Marker in Sydney")
                 .icon(icon));
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));

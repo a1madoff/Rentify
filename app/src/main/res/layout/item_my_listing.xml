@@ -47,6 +47,17 @@
             android:layout_marginTop="10dp"
             tools:text="$29 / day" />
 
+<!--        <Button-->
+<!--            android:id="@+id/btnView"-->
+<!--            android:layout_width="25dp"-->
+<!--            android:layout_height="25dp"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_marginEnd="20dp"-->
+<!--            android:background="@drawable/view"-->
+<!--            android:backgroundTint="#21000000"-->
+<!--            />-->
+
     </RelativeLayout>
 </LinearLayout>
 </androidx.cardview.widget.CardView>

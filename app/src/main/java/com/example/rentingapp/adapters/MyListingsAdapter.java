@@ -1,6 +1,7 @@
 package com.example.rentingapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -17,8 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.example.rentingapp.ListingDetailsActivity;
 import com.example.rentingapp.R;
 import com.example.rentingapp.models.Listing;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -90,7 +94,13 @@ public class MyListingsAdapter extends RecyclerView.Adapter<MyListingsAdapter.Vi
 
         @Override
         public void onClick(View view) {
-            // TODO open version of listing details page but without rent and message buttons
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Listing currentListing = myListings.get(position);
+                Intent intent = new Intent(context, ListingDetailsActivity.class);
+                intent.putExtra("listing", Parcels.wrap(currentListing));
+                context.startActivity(intent);
+            }
         }
     }
 
