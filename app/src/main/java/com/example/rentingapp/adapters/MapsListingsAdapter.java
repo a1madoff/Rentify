@@ -99,13 +99,13 @@ public class MapsListingsAdapter extends RecyclerView.Adapter<MapsListingsAdapte
 
         @Override
         public void onClick(View view) {
-            int position = getAdapterPosition();
-            if (position != RecyclerView.NO_POSITION) {
-                Listing currentListing = listings.get(position);
-                Intent intent = new Intent(context, ListingDetailsActivity.class);
-//                intent.putExtra(Listing.class.getSimpleName(), Parcels.wrap(currentListing));
-                context.startActivity(intent);
-            }
+//            int position = getAdapterPosition();
+//            if (position != RecyclerView.NO_POSITION) {
+//                Listing currentListing = listings.get(position);
+//                Intent intent = new Intent(context, ListingDetailsActivity.class);
+////                intent.putExtra(Listing.class.getSimpleName(), Parcels.wrap(currentListing));
+//                context.startActivity(intent);
+//            }
         }
     }
 
