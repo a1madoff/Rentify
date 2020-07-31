@@ -22,6 +22,9 @@ Renting
 - User opens the app to browse (and subsequently rent items) around an experience
     - Weekend outdoors: expands to show assorted camping equipment and a camera drone available for rent
 
+#### Screens Tree
+https://github.com/a1madoff/RentingApp/blob/master/Screens%20Tree.png
+
 ### App Evaluation
 [Evaluation of your app across the following attributes]
 - **Category:** Peer to peer, rental
@@ -108,12 +111,31 @@ https://www.figma.com/file/lRnlfLkRGGGeKzSYai7g3W/Rent-App-Wireframes?node-id=0%
 
 ### [BONUS] Interactive Prototype
 
-<!--
 ## Schema 
-[This section will be completed in Unit 9]
 ### Models
-[Add table of models]
+#### Listing
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | price         | Number   | the listing's price |
+   | seller        | Pointer <User>   | the user who created the listing |
+   | image         | File     | the image associated with the listing |
+   | rating        | Number   | the listing's rating |
+   | description   | String   | the description for the listing |
+   | coordinates   | GeoPoint | the listing's location in coordinates |
+   | title         | String   | the title for the listing |
+   | fullAddress   | String   | the listing's full address |
+   | locality   | String   | the locality (town/neighborhood) in which the listing is located |
+    
+#### Message
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | body          | String   | the body of the message |
+   | listing       | Pointer <Listing>   | the listing the message is inquiring about |
+   | fromUser      | Pointer <User>      | the sender of the message |
+   | toUser        | Pointer <User>      | the recipient of the message |
+
 ### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp] -->
+- GET request to Google Maps API to autocomplete addresses
+- GET request to Parse to get listings
+- GET and POST requests to Parse to send and receive messages
+- POST request to Parse to create listings
