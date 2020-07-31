@@ -1,7 +1,4 @@
-Original App Design Project - README Template
-===
-
-# Peer to Peer Renting App
+# Renting App
 
 ## Table of Contents
 1. [Overview](#Overview)
