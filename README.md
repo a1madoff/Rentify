@@ -42,22 +42,24 @@ Renting
 
 **Required Must-have Stories**
 
-* User can list items for rent
-* User can scroll through tiles of items available
-* User can see available items on a map (using Google maps API)
-* User can message seller to iron out renting details
-
+* User can sign up for a new account
+* User can log in/log out of their account
+    * Currently logged in user does not have to re-authenticate
+* User can browse tiles of items available
+* User can tap on a listing to see details for that listing
+* User can see available items on a map (using Google maps SDK)
+* User can select the dates for which they would like to rent the item
+* User can view total rental cost and reserve the rental
+* User can list their items for rent, inputting details of the listing
 
 **Optional Nice-to-have Stories**
 
-* Users can filter listings by price, location, category, etc
-* Profile pages for each user
-    * Keeps track of rentable items user has saved
-    * Displays items that user has listed for rent
-* Users can browse experiences
-    * When selected, expand to show a list of rentable items that fuel the particular experience
-* Users must upload proof of ID to list items in the app
-* Review score for each renter/lender
+* Users can select their current location instead of manually inputting an address when creating listings
+* Users can view their listings in a dashboard
+* Users can message one another to ask questions/iron out renting details
+* Users can view their conversations across all listings through an inbox
+* Users can save listings for later access
+* Users can browse experiences, that when selected expand to show a list of rentable items that fuel the particular experience
 
 ### 2. Screen Archetypes
 
@@ -79,7 +81,7 @@ Renting
 * Profile
 * Settings
 
-**Flow Navigation** (Scren to Screen)
+**Flow Navigation** (Screen to Screen)
 
 Forced Log-in -> Account creation if no log in is available
 

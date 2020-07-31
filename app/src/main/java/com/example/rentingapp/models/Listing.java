@@ -1,5 +1,7 @@
 package com.example.rentingapp.models;
 
+import androidx.annotation.Nullable;
+
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
@@ -7,6 +9,8 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import org.parceler.Parcel;
+
+import java.util.Arrays;
 
 @ParseClassName("Listing")
 public class Listing extends ParseObject {
@@ -86,4 +90,18 @@ public class Listing extends ParseObject {
     }
 
 
+    @Override
+    public int hashCode() {
+        return getObjectId().hashCode();
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (!(obj instanceof Listing)) {
+            return false;
+        }
+
+        Listing other = (Listing) obj;
+        return this.hashCode() == other.hashCode();
+    }
 }

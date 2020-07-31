@@ -151,7 +151,6 @@ public class ChatActivity extends AppCompatActivity {
     // Queries messages from Parse to load them into the chat adapter
     void refreshMessages() {
         // Constructs queries to execute
-
         ParseQuery<Message> queryFromUser = ParseQuery.getQuery(Message.class);
         queryFromUser.whereEqualTo(Message.KEY_LISTING, listing);
         queryFromUser.whereEqualTo(Message.KEY_FROM_USER, ParseUser.getCurrentUser());

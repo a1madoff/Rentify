@@ -13,12 +13,20 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/bottomNavigation" />
 
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="3dp"-->
+<!--        android:layout_above="@id/bottomNavigation"-->
+<!--        android:background="@drawable/shadow"/>-->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:elevation="10dp"
+        app:elevation="10dp"
+        android:background="@color/backgroundColor"
         app:itemIconSize="20dp"
         app:menu="@menu/menu_bottom_navigation" />
 <!--        app:itemIconTint="@android:color/black"-->

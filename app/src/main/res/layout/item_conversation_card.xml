@@ -1,24 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="100dp"
+    android:layout_marginBottom="15dp"
+    app:cardCornerRadius="10dp"
+    >
 
-    <ImageView
-        android:id="@+id/ivListingImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/stock_camera"
-        android:scaleType="centerCrop"
-        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_toEndOf="@id/ivListingImage"
-        android:text="Olympus OM-D"
-        android:textSize="18sp" />
+        <RelativeLayout
+            android:id="@+id/layoutSender"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            >
 
-</RelativeLayout>
+
+        <ImageView
+            android:id="@+id/ivSellerImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            tools:srcCompat="@drawable/random_prof"
+            />
+
+        <TextView
+            android:id="@+id/tvSellerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivSellerImage"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            tools:text="John S." />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/ivListingImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@drawable/stock_camera"
+            android:layout_toEndOf="@id/layoutSender"
+            />
+
+<!--        <TextView-->
+<!--            android:id="@+id/tvListingName"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:layout_marginEnd="10dp"-->
+<!--            android:layout_toStartOf="@+id/ivListingImage"-->
+<!--            android:textSize="18sp"-->
+<!--            tools:text="Olympus OM-D" />-->
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

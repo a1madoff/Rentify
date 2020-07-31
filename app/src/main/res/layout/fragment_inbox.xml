@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.InboxFragment"
-    android:paddingTop="30dp"
+    android:paddingTop="55dp"
     android:paddingHorizontal="25dp"
     >
 
@@ -14,8 +14,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Inbox"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="30sp" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#91000000"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="34sp" />
 
     <View
         android:id="@+id/divider"
@@ -23,11 +25,11 @@
         android:layout_height="1dp"
         android:layout_below="@id/inbox"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="25dp"
         android:background="?android:attr/listDivider" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMessages"
+        android:id="@+id/rvConversations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/divider"

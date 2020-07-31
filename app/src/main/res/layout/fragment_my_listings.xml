@@ -24,9 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnAddListing"
         android:layout_marginTop="10dp"
-        android:fontFamily="sans-serif-medium"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="34sp"
         android:textColor="#91000000"
+        android:fontFamily="sans-serif-medium"
         tools:text="0 Listings" />
 
     <View
