@@ -93,7 +93,8 @@ public class ListingsAdapter extends RecyclerView.Adapter<ListingsAdapter.ViewHo
         public void bind(Listing listing) {
             Glide.with(context)
                     .load(listing.getImage().getUrl())
-                    .transform(new MultiTransformation(new CenterCrop(), new RoundedCornersTransformation(30, 10)))
+//                    .transform(new MultiTransformation(new CenterCrop(), new RoundedCornersTransformation(30, 10)))
+                    .transform(new CenterCrop())
                     .into(ivListingImage);
 
             ratingBar.setRating((float) listing.getRating());
@@ -101,6 +102,9 @@ public class ListingsAdapter extends RecyclerView.Adapter<ListingsAdapter.ViewHo
             tvTtitle.setText(listing.getTitle());
             tvLocation.setText(listing.getLocality());
 
+            if (listing.getRating() == 0.0) {
+                tvNumRentals.setText("(0)");
+            }
         }
 
         @Override
