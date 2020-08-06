@@ -8,9 +8,7 @@ import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
-import org.parceler.Parcel;
-
-import java.util.Arrays;
+import java.util.List;
 
 @ParseClassName("Listing")
 public class Listing extends ParseObject {
@@ -23,6 +21,10 @@ public class Listing extends ParseObject {
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_FULLADDRESS = "fullAddress";
     public static final String KEY_LOCALITY = "locality";
+    public static final String KEY_LIKEDBY = "likedBy";
+
+    public boolean liked = false;
+    public double score = Double.NaN;
 
     public Listing() {}
 
@@ -82,13 +84,20 @@ public class Listing extends ParseObject {
         put(KEY_FULLADDRESS, fullAddress);
     }
 
-    public String getLocality() {
-        return getString(KEY_LOCALITY);
-    }
+    public String getLocality() { return getString(KEY_LOCALITY); }
     public void setLocality(String locality) {
         put(KEY_LOCALITY, locality);
     }
 
+    public List<String> getLikedBy() { return getList(KEY_LIKEDBY); }
+    public void setLikedBy(List<String> likedBy) { put(KEY_LIKEDBY, likedBy); }
+
+    public boolean isLiked() { return liked; }
+    public void setLiked(boolean liked) { this.liked = liked; }
+
+    public Double getScore() { return score; }
+
+    public void setScore(double score) { this.score = score; }
 
     @Override
     public int hashCode() {

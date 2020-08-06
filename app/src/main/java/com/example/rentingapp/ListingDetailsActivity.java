@@ -35,9 +35,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.ui.IconGenerator;
 import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
 import org.parceler.Parcels;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
@@ -48,6 +52,7 @@ public class ListingDetailsActivity extends AppCompatActivity implements OnMapRe
     Context context;
 
     ImageView ivListingImage;
+    ImageView ivHeart;
     TextView tvTitle;
     TextView tvLocation;
     TextView tvDescription;
@@ -56,6 +61,8 @@ public class ListingDetailsActivity extends AppCompatActivity implements OnMapRe
     TextView tvName;
     Button btnMessage;
     Button btnRent;
+
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +75,11 @@ public class ListingDetailsActivity extends AppCompatActivity implements OnMapRe
 
         context = this;
         listing = Parcels.unwrap(getIntent().getParcelableExtra("listing"));
+        listing.setLiked(getIntent().getBooleanExtra("liked", false));
+        position = getIntent().getIntExtra("position", -1);
 
         ivListingImage = findViewById(R.id.ivListingImage);
+        ivHeart = findViewById(R.id.ivHeart);
         tvTitle = findViewById(R.id.tvTitle);
         tvLocation = findViewById(R.id.tvLocation);
         tvDescription = findViewById(R.id.tvDescription);
@@ -109,6 +119,51 @@ public class ListingDetailsActivity extends AppCompatActivity implements OnMapRe
         }
 
         tvName.setText(String.format("%s %s", listing.getSeller().getString("firstName"), listing.getSeller().getString("lastName")));
+
+        if (listing.isLiked()) {
+            ivHeart.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.heart_full));
+            ivHeart.setAlpha(0.7f); // 0.7 or 0.8
+        } else {
+            ivHeart.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.heart_empty));
+            ivHeart.setAlpha(1.0f);
+        }
+
+        ivHeart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                List<String> likes = currentUser.getList("likes");
+                if (likes == null) {
+                    likes = new ArrayList<>();
+                }
+
+                List<String> likedBy = listing.getLikedBy();
+                if (likedBy == null) {
+                    likedBy = new ArrayList<>();
+                }
+
+                if (listing.isLiked()) {
+                    ivHeart.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.heart_empty));
+                    ivHeart.setAlpha(1.0f);
+                    listing.setLiked(false);
+
+                    likes.remove(listing.getObjectId());
+                    likedBy.remove(currentUser.getObjectId());
+                } else {
+                    ivHeart.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.heart_full));
+                    ivHeart.setAlpha(0.7f); // 0.7 or 0.8
+                    listing.setLiked(true);
+
+                    likes.add(listing.getObjectId());
+                    likedBy.add(currentUser.getObjectId());
+                }
+                currentUser.put("likes", likes);
+                currentUser.saveInBackground();
+
+                listing.setLikedBy(likedBy);
+                listing.saveInBackground();
+            }
+        });
 
         btnMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,5 +213,15 @@ public class ListingDetailsActivity extends AppCompatActivity implements OnMapRe
                 .icon(icon));
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra("liked", listing.isLiked());
+        intent.putExtra("position", position);
+        setResult(RESULT_OK, intent);
+        finish();
+        super.onBackPressed();
     }
 }

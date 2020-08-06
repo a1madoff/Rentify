@@ -28,6 +28,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         if (ParseUser.getCurrentUser() != null) {
+//            try {
+//                ParseUser.getCurrentUser().fetch();
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
             goMainActivity();
         }
 

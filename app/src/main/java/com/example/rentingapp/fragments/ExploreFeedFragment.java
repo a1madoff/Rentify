@@ -18,21 +18,26 @@ import com.example.rentingapp.models.Listing;
 import com.example.rentingapp.adapters.ListingsAdapter;
 import com.example.rentingapp.MapsActivity;
 import com.example.rentingapp.R;
+import com.example.rentingapp.tools.Recommendations;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ExploreFeedFragment extends Fragment {
     public static final String TAG = "ExploreFeedFragment";
+    public static final int REQUEST_CODE_DETAILS = 10;
 
-    List<Listing> listings;
+    List<Listing> mListings;
     ListingsAdapter adapter;
 
     FloatingActionButton floatingButton;
@@ -55,9 +60,9 @@ public class ExploreFeedFragment extends Fragment {
         RecyclerView rvListings = view.findViewById(R.id.rvListings);
         floatingButton = view.findViewById(R.id.floatingButton);
 
-        listings = new ArrayList<>();
+        mListings = new ArrayList<>();
 
-        adapter = new ListingsAdapter(getContext(), listings);
+        adapter = new ListingsAdapter(getContext(), mListings, ExploreFeedFragment.this);
         rvListings.setAdapter(adapter);
 
 //        rvListings.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -72,7 +77,6 @@ public class ExploreFeedFragment extends Fragment {
                 startActivity(i);
             }
         });
-
         getListings();
     }
 
@@ -80,6 +84,7 @@ public class ExploreFeedFragment extends Fragment {
         // Specifies which class to query
         ParseQuery<Listing> query = ParseQuery.getQuery(Listing.class);
         query.include(Listing.KEY_SELLER); // TODO: need to include seller?
+        query.include(Listing.KEY_LIKEDBY);
         query.orderByDescending("createdAt");
         query.findInBackground(new FindCallback<Listing>() {
             @Override
@@ -88,8 +93,38 @@ public class ExploreFeedFragment extends Fragment {
                     Log.e(TAG, "Issue with getting listings", e);
                     return;
                 }
-                adapter.addAll(listings);
+                for (Listing listing : listings) {
+                    List<Object> usersWhoLike = listing.getList(Listing.KEY_LIKEDBY);
+                    if (usersWhoLike != null && usersWhoLike.contains(ParseUser.getCurrentUser().getObjectId())) {
+                        listing.setLiked(true);
+                    }
+                }
+
+                mListings = listings;
+//                adapter.setListings(listings);
+//                adapter.addAll(listings);
+
+
+            //        BEGIN
+                Recommendations recommendations = new Recommendations(mListings, adapter);
+                recommendations.driver(ParseUser.getCurrentUser().getObjectId());
+            //        END
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == REQUEST_CODE_DETAILS && resultCode == RESULT_OK) {
+            boolean liked = data.getBooleanExtra("liked", false);
+            int position = data.getIntExtra("position", -1);
+
+            Listing listing = mListings.get(position);
+            if (listing.isLiked() != liked) {
+                listing.setLiked(liked);
+                adapter.notifyItemChanged(position, liked);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

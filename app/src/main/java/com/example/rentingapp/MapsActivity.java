@@ -104,7 +104,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
 
                     Marker marker = listingMarkerHM.get(listing.getObjectId());
                     setMarkerIcon(marker, true);
-                    marker.setZIndex(1.0f);
+                    marker.setZIndex(0.1f);
 
                     boolean markerInView = map.getProjection()
                             .getVisibleRegion()
@@ -126,8 +126,11 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
     @Override
     public boolean onMarkerClick(Marker marker) {
         setMarkerIcon(prevHighlightedMarker, false);
+        prevHighlightedMarker.setZIndex(0.0f);
+
         setMarkerIcon(marker, true);
         prevHighlightedMarker = marker;
+        marker.setZIndex(0.1f);
 
         Listing listing = MarkerListingHM.get(marker);
         int position = listings.indexOf(listing);
