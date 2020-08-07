@@ -77,25 +77,13 @@ dependencies {
 
     implementation "com.github.prolificinteractive:material-calendarview:1.6.0"
 
-    implementation 'org.apache.mahout:mahout-mr:0.13.0'
+//    implementation 'org.apache.mahout:mahout-mr:0.13.0'
 
-//    implementation ('org.apache.mahout:mahout-mr:0.13.0') {
-//        force = true
+//    configurations.all {
+//        exclude group:"com.google.protobuf", module: "protobuf-lite"
+//        exclude group:"commons-beanutils", module: "commons-beanutils-core"
+//        exclude group:"commons-collections", module: "commons-collections"
+//        exclude group:"org.apache.hadoop", module: "hadoop-yarn-common"
+//        exclude group:"xpp3", module: "xpp3_min"
 //    }
-
-//    implementation ('com.google.protobuf:protobuf-java:2.5.0') {
-//        exclude group: 'com.google.protobuf'
-//    }
-
-//    configurations {
-//        all*.exclude group: 'com.google.protobuf', module: 'protobuf-java'
-//    }
-
-    configurations.all {
-        exclude group:"com.google.protobuf", module: "protobuf-lite"
-        exclude group:"commons-beanutils", module: "commons-beanutils-core"
-        exclude group:"commons-collections", module: "commons-collections"
-        exclude group:"org.apache.hadoop", module: "hadoop-yarn-common"
-        exclude group:"xpp3", module: "xpp3_min"
-    }
 }

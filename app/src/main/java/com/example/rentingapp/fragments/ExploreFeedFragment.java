@@ -24,6 +24,8 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +75,7 @@ public class ExploreFeedFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getContext(), MapsActivity.class);
+                i.putExtra("listings", Parcels.wrap(mListings));
                 startActivity(i);
             }
         });

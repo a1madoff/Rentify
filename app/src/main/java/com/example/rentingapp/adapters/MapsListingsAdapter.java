@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,14 +12,11 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.example.rentingapp.R;
 import com.example.rentingapp.models.Listing;
 
 import java.util.List;
-
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class MapsListingsAdapter extends RecyclerView.Adapter<MapsListingsAdapter.ViewHolder> {
     Context context;
@@ -59,10 +55,10 @@ public class MapsListingsAdapter extends RecyclerView.Adapter<MapsListingsAdapte
         public ImageView ivListingImage;
         public ImageView ivHeart;
         public TextView tvPrice;
-        public TextView tvDescription;
-        public RatingBar ratingBar;
-        public TextView tvNumRentals;
-        public TextView tvLocation;
+//        public TextView tvDescription;
+//        public RatingBar ratingBar;
+//        public TextView tvNumRentals;
+//        public TextView tvLocation;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -70,13 +66,13 @@ public class MapsListingsAdapter extends RecyclerView.Adapter<MapsListingsAdapte
             ivListingImage = itemView.findViewById(R.id.ivListingImage);
             ivHeart = itemView.findViewById(R.id.ivHeart);
             tvPrice = itemView.findViewById(R.id.tvPrice);
-            tvDescription = itemView.findViewById(R.id.tvTitle);
-            ratingBar = itemView.findViewById(R.id.ratingBar);
-            tvNumRentals = itemView.findViewById(R.id.tvNumRentals);
-            tvLocation = itemView.findViewById(R.id.tvLocation);
-
-            itemView.setOnClickListener(this);
-
+//            tvDescription = itemView.findViewById(R.id.tvTitle);
+//            ratingBar = itemView.findViewById(R.id.ratingBar);
+//            tvNumRentals = itemView.findViewById(R.id.tvNumRentals);
+//            tvLocation = itemView.findViewById(R.id.tvLocation);
+//
+//            itemView.setOnClickListener(this);
+//
             ivHeart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -87,12 +83,14 @@ public class MapsListingsAdapter extends RecyclerView.Adapter<MapsListingsAdapte
         }
 
         public void bind(Listing listing) {
-            ratingBar.setRating((float) 4.2);
+//            ratingBar.setRating((float) 4.2);
 
             Glide.with(context)
                     .load(listing.getImage().getUrl())
-                    .transform(new MultiTransformation(new CenterCrop(), new RoundedCornersTransformation(50, 40)))
+                    .transform(new CenterCrop())
                     .into(ivListingImage);
+
+            tvPrice.setText(String.format("$%d", listing.getPrice()));
         }
 
         @Override

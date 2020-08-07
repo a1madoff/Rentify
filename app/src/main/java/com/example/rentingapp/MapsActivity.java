@@ -2,7 +2,6 @@ package com.example.rentingapp;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -26,12 +25,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.ui.IconGenerator;
-import com.parse.FindCallback;
-import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
-import com.parse.ParseQuery;
 
-import java.util.ArrayList;
+import org.parceler.Parcels;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -59,11 +56,12 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        listings = Parcels.unwrap(getIntent().getParcelableExtra("listings"));
+
         rvMapListings = findViewById(R.id.rvMapListings);
         snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(rvMapListings);
 
-        listings = new ArrayList<>();
         adapter = new MapsListingsAdapter(this, listings);
         rvMapListings.setAdapter(adapter);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -139,53 +137,37 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
     }
 
     private void getListings() {
-        // Specifies which class to query
-        ParseQuery<Listing> query = ParseQuery.getQuery(Listing.class);
-        query.include(Listing.KEY_SELLER); // TODO: need to include seller?
-//        query.whereNear("location", userLocation); // OR whereWithinMiles
-//        query.whereWithinMiles()
-//        query.setLimit(10);
-        query.findInBackground(new FindCallback<Listing>() {
-            @Override
-            public void done(List<Listing> listings, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with getting listings", e);
-                    return;
-                }
+        IconGenerator iconGenerator = new IconGenerator(MapsActivity.this);
+        iconGenerator.setBackground(ContextCompat.getDrawable(MapsActivity.this, R.drawable.text_box));
 
-                IconGenerator iconGenerator = new IconGenerator(MapsActivity.this);
-                iconGenerator.setBackground(ContextCompat.getDrawable(MapsActivity.this, R.drawable.text_box));
+        for (Listing listing : listings) {
+            String price = String.format("$%s", listing.getPrice());
+            Bitmap bitmap = iconGenerator.makeIcon(price);
+            // Uses BitmapDescriptorFactory to create the marker
+            BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(bitmap);
 
-                for (Listing listing : listings) {
-                    String price = String.format("$%s", Integer.toString(listing.getPrice()));
-                    Bitmap bitmap = iconGenerator.makeIcon(price);
-                    // Uses BitmapDescriptorFactory to create the marker
-                    BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(bitmap);
+            ParseGeoPoint geoPoint = listing.getCoordinates();
+            LatLng latLng = new LatLng(geoPoint.getLatitude(), geoPoint.getLongitude());
+            Marker marker = map.addMarker(new MarkerOptions()
+                    .position(latLng)
+                    .title(price)
+                    .icon(icon));
 
-                    ParseGeoPoint geoPoint = listing.getCoordinates();
-                    LatLng latLng = new LatLng(geoPoint.getLatitude(), geoPoint.getLongitude());
-                    Marker marker = map.addMarker(new MarkerOptions()
-                            .position(latLng)
-                            .title(price)
-                            .icon(icon));
+            listingMarkerHM.put(listing.getObjectId(), marker);
+            MarkerListingHM.put(marker, listing);
+        }
 
-                    listingMarkerHM.put(listing.getObjectId(), marker);
-                    MarkerListingHM.put(marker, listing);
-                }
-                adapter.addAll(listings);
+        // Listing 1
+        Listing listing1 = listings.get(0);
+        Marker marker1 = listingMarkerHM.get(listing1.getObjectId());
+        setMarkerIcon(marker1, true);
+        marker1.setZIndex(0.1f);
+        prevHighlightedMarker = marker1;
 
-                // Listing 1
-                Listing listing1 = listings.get(0);
-                Marker marker1 = listingMarkerHM.get(listing1.getObjectId());
-                setMarkerIcon(marker1, true);
-                prevHighlightedMarker = marker1;
-
-                ParseGeoPoint GeoPoint1 = listing1.getCoordinates();
-                LatLng LatLng1 = new LatLng(GeoPoint1.getLatitude(), GeoPoint1.getLongitude());
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(LatLng1, 15);
-                map.moveCamera(cameraUpdate);
-            }
-        });
+        ParseGeoPoint GeoPoint1 = listing1.getCoordinates();
+        LatLng LatLng1 = new LatLng(GeoPoint1.getLatitude(), GeoPoint1.getLongitude());
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(LatLng1, 15);
+        map.moveCamera(cameraUpdate);
     }
 
     private void setMarkerIcon(Marker marker, boolean selected) {
