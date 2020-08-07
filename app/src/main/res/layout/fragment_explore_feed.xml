@@ -24,11 +24,12 @@
         android:layout_margin="16dp"
         android:scaleType="center"
         android:src="@drawable/map"
+        android:tint="@color/white"
         android:visibility="visible"
         app:layout_anchor="@id/rvListings"
         app:layout_anchorGravity="bottom|center"
         app:layout_behavior="com.example.rentingapp.tools.ScrollAwareFABBehavior"
-        app:maxImageSize="26dp" />
+        app:maxImageSize="30dp" />
 <!--    android:backgroundTint="@color/white"-->
 <!--    app:backgroundTint="@color/white"-->
 
