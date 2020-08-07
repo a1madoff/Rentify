@@ -12,11 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.rentingapp.ChatActivity;
-import com.example.rentingapp.ListingDetailsActivity;
 import com.example.rentingapp.R;
 import com.example.rentingapp.models.Listing;
 import com.parse.ParseException;
@@ -25,8 +23,6 @@ import com.parse.ParseFile;
 import org.parceler.Parcels;
 
 import java.util.List;
-
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdapter.ViewHolder> {
     Context context;

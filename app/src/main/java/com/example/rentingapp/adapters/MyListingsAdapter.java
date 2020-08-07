@@ -16,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.example.rentingapp.ListingDetailsActivity;
 import com.example.rentingapp.R;
@@ -25,8 +24,6 @@ import com.example.rentingapp.models.Listing;
 import org.parceler.Parcels;
 
 import java.util.List;
-
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class MyListingsAdapter extends RecyclerView.Adapter<MyListingsAdapter.ViewHolder> {
     Context context;

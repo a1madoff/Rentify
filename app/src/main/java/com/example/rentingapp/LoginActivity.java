@@ -1,7 +1,5 @@
 package com.example.rentingapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -28,11 +28,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         if (ParseUser.getCurrentUser() != null) {
-//            try {
-//                ParseUser.getCurrentUser().fetch();
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
+            // Can remove this network call for production, just for when users are edited server-side
+            try {
+                ParseUser.getCurrentUser().fetch();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             goMainActivity();
         }
 

@@ -2,8 +2,8 @@ package com.example.rentingapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -20,8 +20,7 @@ import com.example.rentingapp.ListingDetailsActivity;
 import com.example.rentingapp.R;
 import com.example.rentingapp.fragments.ExploreFeedFragment;
 import com.example.rentingapp.models.Listing;
-import com.parse.ParseQuery;
-import com.parse.ParseRelation;
+import com.example.rentingapp.tools.OnDoubleTapListener;
 import com.parse.ParseUser;
 
 import org.parceler.Parcels;
@@ -87,7 +86,7 @@ public class ListingsAdapter extends RecyclerView.Adapter<ListingsAdapter.ViewHo
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView ivListingImage;
         public ImageView ivHeart;
         public TextView tvPrice;
@@ -107,49 +106,72 @@ public class ListingsAdapter extends RecyclerView.Adapter<ListingsAdapter.ViewHo
             tvNumRentals = itemView.findViewById(R.id.tvNumRentals);
             tvLocation = itemView.findViewById(R.id.tvLocation);
 
-            itemView.setOnClickListener(this);
+            itemView.setOnTouchListener(new OnDoubleTapListener(context) {
+                @Override
+                public void onDoubleTap(MotionEvent e) {
+                    handleLike();
+                }
+
+                @Override
+                public void onSingleTap(MotionEvent e) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        Listing currentListing = listings.get(position);
+                        Intent intent = new Intent(context, ListingDetailsActivity.class);
+                        intent.putExtra("listing", Parcels.wrap(currentListing));
+                        intent.putExtra("liked", currentListing.isLiked());
+                        intent.putExtra("position", position);
+
+                        fragment.startActivityForResult(intent, ExploreFeedFragment.REQUEST_CODE_DETAILS);
+                    }
+                }
+            });
 
             ivHeart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION) {
-                        Listing currentListing = listings.get(position);
-                        ParseUser currentUser = ParseUser.getCurrentUser();
-
-                        List<String> likes = currentUser.getList("likes");
-                        if (likes == null) {
-                            likes = new ArrayList<>();
-                        }
-
-                        List<String> likedBy = currentListing.getLikedBy();
-                        if (likedBy == null) {
-                            likedBy = new ArrayList<>();
-                        }
-
-                        if (currentListing.isLiked()) {
-                            ivHeart.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.heart_empty));
-                            ivHeart.setAlpha(1.0f);
-                            currentListing.setLiked(false);
-
-                            likes.remove(currentListing.getObjectId());
-                            likedBy.remove(currentUser.getObjectId());
-                        } else {
-                            ivHeart.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.heart_full));
-                            ivHeart.setAlpha(0.7f); // 0.7 or 0.8
-                            currentListing.setLiked(true);
-
-                            likes.add(currentListing.getObjectId());
-                            likedBy.add(currentUser.getObjectId());
-                        }
-                        currentUser.put("likes", likes);
-                        currentUser.saveInBackground();
-
-                        currentListing.setLikedBy(likedBy);
-                        currentListing.saveInBackground();
-                    }
+                    handleLike();
                 }
             });
+        }
+
+        public void handleLike() {
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Listing currentListing = listings.get(position);
+                ParseUser currentUser = ParseUser.getCurrentUser();
+
+                List<String> likes = currentUser.getList("likes");
+                if (likes == null) {
+                    likes = new ArrayList<>();
+                }
+
+                List<String> likedBy = currentListing.getLikedBy();
+                if (likedBy == null) {
+                    likedBy = new ArrayList<>();
+                }
+
+                if (currentListing.isLiked()) {
+                    ivHeart.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.heart_empty));
+                    ivHeart.setAlpha(1.0f);
+                    currentListing.setLiked(false);
+
+                    likes.remove(currentListing.getObjectId());
+                    likedBy.remove(currentUser.getObjectId());
+                } else {
+                    ivHeart.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.heart_full));
+                    ivHeart.setAlpha(0.7f); // 0.7 or 0.8
+                    currentListing.setLiked(true);
+
+                    likes.add(currentListing.getObjectId());
+                    likedBy.add(currentUser.getObjectId());
+                }
+                currentUser.put("likes", likes);
+                currentUser.saveInBackground();
+
+                currentListing.setLikedBy(likedBy);
+                currentListing.saveInBackground();
+            }
         }
 
         public void bind(Listing listing) {
@@ -174,20 +196,6 @@ public class ListingsAdapter extends RecyclerView.Adapter<ListingsAdapter.ViewHo
 
             if (listing.getRating() == 0.0) {
                 tvNumRentals.setText("(0)");
-            }
-        }
-
-        @Override
-        public void onClick(View view) {
-            int position = getAdapterPosition();
-            if (position != RecyclerView.NO_POSITION) {
-                Listing currentListing = listings.get(position);
-                Intent intent = new Intent(context, ListingDetailsActivity.class);
-                intent.putExtra("listing", Parcels.wrap(currentListing));
-                intent.putExtra("liked", currentListing.isLiked());
-                intent.putExtra("position", position);
-
-                fragment.startActivityForResult(intent, ExploreFeedFragment.REQUEST_CODE_DETAILS);
             }
         }
     }

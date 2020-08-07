@@ -1,5 +1,10 @@
 package com.example.rentingapp;
 
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -7,11 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
-
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 
 import com.example.rentingapp.adapters.MapsListingsAdapter;
 import com.example.rentingapp.models.Listing;

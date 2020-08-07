@@ -2,6 +2,10 @@ package com.example.rentingapp.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,15 +13,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.rentingapp.models.Listing;
-import com.example.rentingapp.adapters.ListingsAdapter;
 import com.example.rentingapp.MapsActivity;
 import com.example.rentingapp.R;
+import com.example.rentingapp.adapters.ListingsAdapter;
+import com.example.rentingapp.models.Listing;
 import com.example.rentingapp.tools.Recommendations;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.FindCallback;

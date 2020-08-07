@@ -1,10 +1,7 @@
 package com.example.rentingapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -12,19 +9,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.example.rentingapp.fragments.DatePickerFragment;
 import com.example.rentingapp.models.Listing;
 
 import org.parceler.Parcels;
 
-import java.util.Calendar;
 import java.text.DateFormatSymbols;
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
-
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class RentActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     float TAX_RATE = 0.0725f;

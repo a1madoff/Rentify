@@ -1,22 +1,18 @@
 package com.example.rentingapp;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.example.rentingapp.fragments.ExploreFeedFragment;
 import com.example.rentingapp.fragments.InboxFragment;
 import com.example.rentingapp.fragments.MyListingsFragment;
 import com.example.rentingapp.fragments.ProfileFragment;
-import com.example.rentingapp.models.Listing;
-import com.example.rentingapp.tools.Recommendations;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.PriorityQueue;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigation;

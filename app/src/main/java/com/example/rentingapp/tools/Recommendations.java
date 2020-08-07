@@ -7,16 +7,12 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-import org.apache.mahout.cf.taste.impl.similarity.TanimotoCoefficientSimilarity;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.Set;
 
 public class Recommendations {
@@ -119,22 +115,25 @@ public class Recommendations {
         };
 
         List<Listing> recommendedOrderListings = new ArrayList<>();
+        Set<String> callingUsersListings = usersToListings.get(userID);
 
         for (Listing listing : listingsToUsers.keySet()) {
-            Set<String> callingUsersListings = usersToListings.get(userID);
-            if (!callingUsersListings.isEmpty() && !callingUsersListings.contains(listing.getObjectId())) {
+            // Only recommend listings that aren't the user's and the user hasn't already saved
+            if (!listing.getSeller().getObjectId().equals(userID) && !callingUsersListings.contains(listing.getObjectId())) {
                 double score = getListingScore(userID, listing);
                 if (Double.isNaN(score) || score == (double) 0.0) {
+                    // If there is no recommendation data for the listing, give it a sorting score based on its creation date
                     score = (double) -1 / (double) listing.getCreatedAt().getTime();
                 }
-                
                 listing.setScore(score);
             } else {
+                // If the listing belongs to the user or has already been saved, give it a sorting score based on its creation date
                 listing.setScore((double) -1 / (double) listing.getCreatedAt().getTime());
             }
             recommendedOrderListings.add(listing);
         }
 
+        // Sort the listings to show recommended listings at the top, while maintaining data order for all others
         Collections.sort(recommendedOrderListings, comparator);
         return recommendedOrderListings;
     }
