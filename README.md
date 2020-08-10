@@ -1,4 +1,4 @@
-# Renting App
+# Rentify
 
 ## Table of Contents
 1. [Overview](#Overview)
