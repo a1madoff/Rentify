@@ -22,9 +22,8 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,7 +87,7 @@ public class InboxFragment extends Fragment {
                     return;
                 }
 
-                Set<Listing> listingSet = new HashSet<>();
+                LinkedHashSet<Listing> listingSet = new LinkedHashSet<>();
                 for (Message message : messages) {
                     listingSet.add(message.getListing());
                 }

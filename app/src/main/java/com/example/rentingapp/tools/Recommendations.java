@@ -12,6 +12,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +21,7 @@ public class Recommendations {
     List<Listing> listings;
     ListingsAdapter adapter;
 
-    HashMap<Listing, List<String>> listingsToUsers = new HashMap<>();
+    LinkedHashMap<Listing, List<String>> listingsToUsers = new LinkedHashMap<>();
     HashMap<String, Set<String>> usersToListings = new HashMap<>();
 
     public Recommendations(List<Listing> listings, ListingsAdapter adapter) {
@@ -114,28 +116,28 @@ public class Recommendations {
             }
         };
 
-        List<Listing> recommendedOrderListings = new ArrayList<>();
+        List<Listing> recommendedListings = new ArrayList<>();
         Set<String> callingUsersListings = usersToListings.get(userID);
 
-        for (Listing listing : listingsToUsers.keySet()) {
+        Iterator<Listing> iterator = listingsToUsers.keySet().iterator();
+        while (iterator.hasNext()) {
+            Listing listing = iterator.next();
             // Only recommend listings that aren't the user's and the user hasn't already saved
             if (!listing.getSeller().getObjectId().equals(userID) && !callingUsersListings.contains(listing.getObjectId())) {
                 double score = getListingScore(userID, listing);
-                if (Double.isNaN(score) || score == (double) 0.0) {
-                    // If there is no recommendation data for the listing, give it a sorting score based on its creation date
-                    score = (double) -1 / (double) listing.getCreatedAt().getTime();
+                if (!Double.isNaN(score) && score != (double) 0.0) {
+                    listing.setScore(score);
+                    recommendedListings.add(listing);
+                    iterator.remove();
                 }
-                listing.setScore(score);
-            } else {
-                // If the listing belongs to the user or has already been saved, give it a sorting score based on its creation date
-                listing.setScore((double) -1 / (double) listing.getCreatedAt().getTime());
             }
-            recommendedOrderListings.add(listing);
         }
 
-        // Sort the listings to show recommended listings at the top, while maintaining data order for all others
-        Collections.sort(recommendedOrderListings, comparator);
-        return recommendedOrderListings;
+
+        // Sort the recommended listings by score
+        Collections.sort(recommendedListings, comparator);
+        recommendedListings.addAll(listingsToUsers.keySet());
+        return recommendedListings;
     }
 
 

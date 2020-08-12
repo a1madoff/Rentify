@@ -1,6 +1,7 @@
 package com.example.rentingapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.example.rentingapp.ListingDetailsActivity;
 import com.example.rentingapp.R;
 import com.example.rentingapp.models.Listing;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -71,7 +75,7 @@ public class MapsListingsAdapter extends RecyclerView.Adapter<MapsListingsAdapte
 //            tvNumRentals = itemView.findViewById(R.id.tvNumRentals);
 //            tvLocation = itemView.findViewById(R.id.tvLocation);
 //
-//            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(this);
 //
             ivHeart.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -95,13 +99,16 @@ public class MapsListingsAdapter extends RecyclerView.Adapter<MapsListingsAdapte
 
         @Override
         public void onClick(View view) {
-//            int position = getAdapterPosition();
-//            if (position != RecyclerView.NO_POSITION) {
-//                Listing currentListing = listings.get(position);
-//                Intent intent = new Intent(context, ListingDetailsActivity.class);
-////                intent.putExtra(Listing.class.getSimpleName(), Parcels.wrap(currentListing));
-//                context.startActivity(intent);
-//            }
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Listing currentListing = listings.get(position);
+                Intent intent = new Intent(context, ListingDetailsActivity.class);
+                intent.putExtra("listing", Parcels.wrap(currentListing));
+                intent.putExtra("liked", currentListing.isLiked());
+                intent.putExtra("position", position);
+
+                context.startActivity(intent);
+            }
         }
     }
 

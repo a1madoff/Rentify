@@ -106,7 +106,8 @@ public class SetLocationDialogFragment extends DialogFragment {
 
                 fullAddress = place.getAddress();
                 fullAddress = fullAddress.substring(0, fullAddress.length() - 5);
-                locality = place.getAddressComponents().asList().get(3).getName();
+
+                locality = place.getAddressComponents().asList().get(2).getName();
 
                 Log.i(TAG, "Place: " + place.getName() + ", " + place.getAddress());
             }
