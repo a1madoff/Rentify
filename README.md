@@ -1,5 +1,7 @@
 # Rentify
 
+# [Pitch Deck & Demo Video](https://docs.google.com/presentation/d/1KcnriQdIKS5EpuNBZwCJNNVHp9ycrVzQnRgALItviMk/edit?usp=sharing)
+
 ## Table of Contents
 1. [Overview](#Overview)
 1. [Product Spec](#Product-Spec)
